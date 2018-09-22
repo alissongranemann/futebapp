@@ -9,9 +9,7 @@ export const addGroup = (group) => ({
 export const startAddGroup = (groupData = {}) => {
     return (dispatch) => {
         const {
-            name = '',
-            players = [],
-            games = []
+            name = ''
         } = groupData;
         const group = { name, players, games };
 
@@ -35,6 +33,29 @@ export const editGroup = (id, updates) => ({
     updates
 });
 
+// SET_EXPENSES
+export const setGroups = (groups) => ({
+    type: 'SET_GROUPS',
+    groups
+});
+
+export const startSetGroups = () => {
+    return (dispatch) => {
+        return database.ref('groups').once('value').then((snapshot) => {
+            const groups = [];
+
+            snapshot.forEach((childSnapshot) => {
+                groups.push({
+                id: childSnapshot.key,
+                ...childSnapshot.val()
+                });
+            });
+
+            dispatch(setGroups(groups));
+        });
+    };
+};
+  
 export const addGame = (
     groupId = '',
     {
@@ -46,7 +67,7 @@ export const addGame = (
     }
 ) => ({
     type: 'ADD_GAME',
-    id,
+    groupId,
     game: {
         id: id ? id : uuid(),
         location,

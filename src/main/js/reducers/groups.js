@@ -20,6 +20,8 @@ export default (state = groupsReducerDefaultState, action) => {
           return group;
         };
       });
+    case 'SET_GROUPS':
+      return action.groups;
     case 'ADD_GAME':
       var group = state.find((group) => group.id === action.groupId);
       group.games = [...group.games, action.game];

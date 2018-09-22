@@ -3,23 +3,19 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { addGroup } from './actions/groups';
-import './firebase/firebase'
+import { startSetGroups } from './actions/groups';
+import 'firebase/firebase'
 
 const store = configureStore();
 
-//TODO apagar teste
-store.dispatch(addGroup({
-    id: 'aaaa-bbbb', 
-    name: 'Liga 1', 
-    games: [{ id: 1, location: 'paula ramos', numPlayers: 12 }],
-    players: [{ id: '1', name: 'Alisson' }, {id: '2', name: 'Teste' }]
-}));
-
 const jsx = (
-    <Provider store={store}>
-        <AppRouter />
-    </Provider>
+  <Provider store={store}>
+    <AppRouter />
+  </Provider>
 );
 
-ReactDOM.render(jsx, document.getElementById('app'));
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'));
+
+store.dispatch(startSetGroups()).then(() => {
+  ReactDOM.render(jsx, document.getElementById('app'));
+});
