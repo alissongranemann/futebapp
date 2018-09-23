@@ -1,9 +1,16 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { startRemoveGame } from 'actions/games'
 
-const GameListItem = ({ id, location }) => (
+const GameListItem = (props) => (
   <div>
-    {location}
+    {props.location}
+    <button type="button" onClick={props.startRemoveGame(props.id)}>-</button>
   </div>
 );
 
-export default GameListItem;
+const mapDispatchToProps = (dispatch) => ({
+  startRemoveGame: (id) => () => dispatch(startRemoveGame({ id }))
+});
+
+export default connect(undefined, mapDispatchToProps)(GameListItem);

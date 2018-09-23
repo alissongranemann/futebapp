@@ -22,6 +22,19 @@ export const startAddGame = (gameData = {}) => {
     };
 };
 
+export const removeGame = ({ id } = {}) => ({
+    type: 'REMOVE_GAME',
+    id
+});
+
+export const startRemoveGame = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.ref(`games/${id}`).remove().then(() => {
+            dispatch(removeGame({ id }));
+        });
+    };
+};
+
 export const setGames = (games) => ({
     type: 'SET_GAMES',
     games

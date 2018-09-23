@@ -7,6 +7,8 @@ export default (state = playersReducerDefaultState, action) => {
                 ...state,
                 action.player
             ];
+        case 'REMOVE_PLAYER':
+            return state.filter(({ id }) => id !== action.id);
         case 'SET_PLAYERS':
             return action.players;
         default:

@@ -21,6 +21,19 @@ export const startAddPlayer = (playerData = {}) => {
     };
 };
 
+export const removePlayer = ({ id } = {}) => ({
+    type: 'REMOVE_PLAYER',
+    id
+});
+
+export const startRemovePlayer = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.ref(`players/${id}`).remove().then(() => {
+            dispatch(removePlayer({ id }));
+        });
+    };
+};
+
 export const setPlayers = (players) => ({
     type: 'SET_PLAYERS',
     players

@@ -7,6 +7,8 @@ export default (state = gamesReducerDefaultState, action) => {
                 ...state,
                 action.game
             ];
+        case 'REMOVE_GAME':
+            return state.filter(({ id }) => id !== action.id);
         case 'SET_GAMES':
             return action.games;
         default:
