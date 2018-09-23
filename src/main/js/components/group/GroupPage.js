@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GameList from 'components/game/GameList'
-import PlayerList from '../player/PlayerList';
+import PlayerList from 'components/player/PlayerList';
 
 const ViewGroupPage = (props) => {
   return (

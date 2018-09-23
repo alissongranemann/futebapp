@@ -59,16 +59,14 @@ export default class GameForm extends React.Component {
     };
     onSubmit = (e) => {
         e.preventDefault();
-
-        if (!this.state.numPlayers || !this.state.location) {
+        if (!this.state.location || !this.state.date || !this.state.schedule) {
             this.setState(() => ({ error: 'Preencha os campos obrigatórios.' }));
         } else {
             this.setState(() => ({ error: '' }));
             this.props.onSubmit({
                 location: this.state.location,
-                numPlayers: this.state.numPlayers,
-                date : this.state.date,
-                schedule : this.state.schedule
+                date : this.state.date.valueOf(),
+                schedule : this.state.schedule.valueOf()
             });
         }
     };

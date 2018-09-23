@@ -15,9 +15,9 @@ const GameList = (props) => (
   </div>
 );
 
-const mapStateToProps = (state, props) => {
+const mapStateToProps = (state) => {
     return {
-      games: state.groups.find((group) => group.id === props.groupId).games
+      games: state.games
     };
 };
 

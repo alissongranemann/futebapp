@@ -1,4 +1,3 @@
-import uuid from 'uuid';
 import database from 'firebase/firebase'
 
 export const addGroup = (group) => ({
@@ -27,13 +26,28 @@ export const removeGroup = ({ id } = {}) => ({
     id
 });
 
+export const startRemoveGroup = ({ id } = {}) => {
+    return (dispatch) => {
+        return database.ref(`groups/${id}`).remove().then(() => {
+            dispatch(removeGroup({ id }));
+        });
+    };
+};
+
 export const editGroup = (id, updates) => ({
     type: 'EDIT_GROUP',
     id,
     updates
 });
 
-// SET_EXPENSES
+export const startEditGroup = (id, updates) => {
+    return (dispatch) => {
+        return database.ref(`groups/${id}`).update(updates).then(() => {
+            dispatch(editGroup(id, updates));
+        });
+    }
+};
+
 export const setGroups = (groups) => ({
     type: 'SET_GROUPS',
     groups
@@ -46,8 +60,8 @@ export const startSetGroups = () => {
 
             snapshot.forEach((childSnapshot) => {
                 groups.push({
-                id: childSnapshot.key,
-                ...childSnapshot.val()
+                    id: childSnapshot.key,
+                    ...childSnapshot.val()
                 });
             });
 
@@ -55,39 +69,3 @@ export const startSetGroups = () => {
         });
     };
 };
-  
-export const addGame = (
-    groupId = '',
-    {
-        id = '',
-        location = '',
-        numPlayers = -1,
-        date = '',
-        schedule = ''
-    }
-) => ({
-    type: 'ADD_GAME',
-    groupId,
-    game: {
-        id: id ? id : uuid(),
-        location,
-        numPlayers,
-        date,
-        schedule
-    }
-});
-
-export const addPlayer = (
-    groupId = '',
-    {
-        id = '',
-        name = ''
-    }
-) => ({
-    type: 'ADD_PLAYER',
-    groupId,
-    player: {
-        id: id ? id : uuid(),
-        name
-    }
-});
