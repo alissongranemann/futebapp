@@ -5,14 +5,14 @@ export const addPlayer = (player) => ({
     player
 });
 
-export const startAddPlayer = (playerData = {}) => {
+export const startAddPlayer = (groupId = '', playerData = {}) => {
     return (dispatch) => {
         const {
             name = ''
         } = playerData;
         const player = { name };
-
-        database.ref("players").push(player).then((ref) => {
+        return database.ref("players").push(player).then((ref) => {
+            database.ref(`groups/${groupId}/players/${ref.key}`).set(true);
             dispatch(addPlayer({
                 id: ref.key,
                 ...player

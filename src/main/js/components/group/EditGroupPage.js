@@ -1,24 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import GroupForm from './GroupForm';
-import { editGroup, removeGroup } from 'actions/groups';
+import { startEditGroup, startRemoveGroup } from 'actions/groups';
 
-const EditGroupPage = (props) => {
-  return (
-    <div>
-      <GroupForm
-        group={props.group}
-        onSubmit={(group) => {
-          props.dispatch(editGroup(props.group.id, group));
-          props.history.push('/');
-        }}
-      />
-      <button onClick={() => {
-        props.dispatch(removeGroup({ id: props.group.id }));
-        props.history.push('/');
-      }}>Remover</button>
-    </div>
-  );
+export class EditGroupPage extends React.Component {
+  onSubmit = (group) => {
+    this.props.startEditGroup(this.props.group.id, group);
+    this.props.history.push('/');
+  };
+  onRemove = () => {
+    this.props.startRemoveGroup({ id: this.props.group.id });
+    this.props.history.push('/');
+  };
+  render() {
+    return (
+      <div>
+        <GroupForm
+          group={this.props.group}
+          onSubmit={this.onSubmit}
+        />
+        <button onClick={this.onRemove}>Remove</button>
+      </div>
+    );
+  }
 };
 
 const mapStateToProps = (state, props) => {
@@ -27,4 +31,9 @@ const mapStateToProps = (state, props) => {
   };
 };
 
-export default connect(mapStateToProps)(EditGroupPage);
+const mapDispatchToProps = (dispatch) => ({
+  startEditGroup: (id, group) => dispatch(startEditGroup(id, group)),
+  startRemoveGroup: (data) => dispatch(startRemoveGroup(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditGroupPage);

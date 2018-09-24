@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import GameList from 'components/game/GameList'
 import PlayerList from 'components/player/PlayerList';
 
-const ViewGroupPage = (props) => {
+const ViewGroupPage = ( props ) => {
   return (
     <div>
-      <GameList groupId={props.match.params.id} />
-      <PlayerList groupId={props.match.params.id} />
+      <Link to={`/group/edit/${props.group.id}`}>
+        <h2>{props.group.name}</h2>
+      </Link>
+      <GameList groupId={props.group.id} />
+      <PlayerList groupId={props.group.id} />
     </div>
   );
 };

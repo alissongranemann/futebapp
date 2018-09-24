@@ -36,6 +36,7 @@ export default class GroupForm extends React.Component {
                         value={this.state.name}
                         onChange={this.onNameChange}
                     />
+                    <button>Salvar</button>
                 </form>
             </div>
         )

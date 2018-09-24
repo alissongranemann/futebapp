@@ -8,7 +8,7 @@ const AddPlayerPage = (props) => (
     <h1>Criar jogador</h1>
     <PlayerForm
       onSubmit={(player) => {
-        props.startAddPlayer(player);
+        props.startAddPlayer(props.match.params.groupId, player);
         props.history.push(`/group/${props.match.params.groupId}`);
       }}
     />
@@ -16,7 +16,7 @@ const AddPlayerPage = (props) => (
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddPlayer: (player) => dispatch(startAddPlayer(player))
+  startAddPlayer: (groupId, player) => dispatch(startAddPlayer(groupId, player))
 });
 
 export default connect(undefined, mapDispatchToProps)(AddPlayerPage);
