@@ -1,4 +1,6 @@
 import database from 'firebase/firebase'
+import { addGame } from './games';
+import { addPlayer } from './players';
 
 export const addGroup = (group) => ({
     type: 'ADD_GROUP',
@@ -32,7 +34,6 @@ export const removeGroup = ({ id } = {}) => ({
 export const startRemoveGroup = ({ id } = {}) => {
     return (dispatch, getState) => {
         const user = getState().auth.uid;
-        console.log(id);
         return database.ref(`groups/${id}`).remove().then(() => {
             database.ref(`users/${user}/groups/${id}`).remove();
             dispatch(removeGroup({ id }));
@@ -48,7 +49,6 @@ export const editGroup = (id, updates) => ({
 
 export const startEditGroup = (id, updates) => {
     return (dispatch) => {
-        console.log(id);
         return database.ref(`groups/${id}`).update(updates).then(() => {
             dispatch(editGroup(id, updates));
         });
@@ -63,17 +63,34 @@ export const setGroups = (groups) => ({
 export const startSetGroups = () => {
     return (dispatch, getState) => {
         const user = getState().auth.uid;
-        return database.ref('users').child(`${user}/groups`).once('value').then((groupsSnapshot) => {
-            groupsSnapshot.forEach(function (groupSnapshot) {
+        return database.ref('users').child(`${user}/groups`).once('value').then((userGroupsSnapshot) => {
+            userGroupsSnapshot.forEach(function (userGroupSnapshot) {
                 //TODO wait all groups
-                database.ref('groups').child(groupSnapshot.key).once('value').then((snapshot) => {
+                database.ref('groups').child(userGroupSnapshot.key).once('value').then((groupSnapshot) => {
+                    var value = groupSnapshot.val();
                     const group = {
-                        id: snapshot.key,
-                        ...snapshot.val()
+                        id: groupSnapshot.key,
+                        ...value
                     };
                     dispatch(addGroup(group));
-                    // TODO load games
-                    // TODO load players
+                    for (var key in value.games){
+                        database.ref('games').child(key).once('value').then((gameSnapshot) => {
+                            const game = {
+                                id: gameSnapshot.key,
+                                ...gameSnapshot.val()
+                            };
+                            dispatch(addGame(game));
+                        });
+                    }
+                    for (var key in value.players) {
+                        database.ref('players').child(key).once('value').then((playerSnapshot) => {
+                            const player = {
+                                id: playerSnapshot.key,
+                                ...playerSnapshot.val()
+                            };
+                            dispatch(addPlayer(player));
+                        });
+                    }
                 });
             });
         });

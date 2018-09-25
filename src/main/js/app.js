@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetGroups } from './actions/groups';
-import { startSetGames } from './actions/games';
-import { startSetPlayers } from './actions/players';
 import { login, logout } from './actions/auth'
 import { firebase } from 'firebase/firebase';
 
@@ -30,9 +28,6 @@ firebase.auth().onAuthStateChanged((user) => {
     if (user) {
         store.dispatch(login(user.uid));
         store.dispatch(startSetGroups()).then(() => {
-            //TODO find a way to load other stuff
-            store.dispatch(startSetGames());
-            store.dispatch(startSetPlayers());
             renderApp();
             if(history.location.pathname === '/') {
                 history.push('/dashboard');
