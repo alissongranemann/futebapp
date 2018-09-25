@@ -64,9 +64,9 @@ export const startSetGroups = () => {
     return (dispatch, getState) => {
         const user = getState().auth.uid;
         return database.ref('users').child(`${user}/groups`).once('value').then((userGroupsSnapshot) => {
+            var groupPromises = [];
             userGroupsSnapshot.forEach(function (userGroupSnapshot) {
-                //TODO wait all groups
-                database.ref('groups').child(userGroupSnapshot.key).once('value').then((groupSnapshot) => {
+                var groupPromise = database.ref('groups').child(userGroupSnapshot.key).once('value').then((groupSnapshot) => {
                     var value = groupSnapshot.val();
                     const group = {
                         id: groupSnapshot.key,
@@ -92,7 +92,9 @@ export const startSetGroups = () => {
                         });
                     }
                 });
+                groupPromises.push(groupPromise);
             });
+            return Promise.all(groupPromises);
         });
     };
 };
