@@ -72,6 +72,7 @@ module.exports = (env) => {
         resolve: {
             modules: [
                 path.resolve('./src/main/js'),
+                path.resolve('./src/main/css'),
                 path.resolve('./node_modules')
             ]
         }

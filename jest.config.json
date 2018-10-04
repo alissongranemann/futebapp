@@ -1,7 +1,8 @@
 {
   "verbose": true,
   "modulePaths": [
-    "src/main/js/"
+    "src/main/js/",
+    "src/main/css/"
   ],
   "snapshotSerializers": [
     "enzyme-to-json/serializer"

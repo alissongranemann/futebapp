@@ -6,6 +6,7 @@ import configureStore from './store/configureStore';
 import { startSetGroups } from './actions/groups';
 import { login, logout } from './actions/auth'
 import { firebase } from 'service/firebase';
+import 'styles.scss';
 
 const store = configureStore();
 
