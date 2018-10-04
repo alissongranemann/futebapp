@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render Header correctly 1`] = `
+<header>
+  <h1>
+    Futebapp
+  </h1>
+  <NavLink
+    activeClassName="is-active"
+    aria-current="page"
+    exact={true}
+    to="/dashboard"
+  >
+    Home
+  </NavLink>
+  <button
+    onClick={[Function]}
+  >
+    Logout
+  </button>
+</header>
+`;

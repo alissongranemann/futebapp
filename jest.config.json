@@ -1,0 +1,13 @@
+{
+  "verbose": true,
+  "modulePaths": [
+    "src/main/js/"
+  ],
+  "snapshotSerializers": [
+    "enzyme-to-json/serializer"
+  ],
+  "setupFiles": [
+    "raf/polyfill",
+    "<rootDir>/src/main/js/tests/setupTests.js"
+  ]
+}

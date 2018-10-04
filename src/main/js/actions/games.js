@@ -1,4 +1,4 @@
-import database from 'firebase/firebase'
+import database from 'service/firebase'
 
 export const addGame = (game) => ({
     type: 'ADD_GAME',
@@ -36,26 +36,16 @@ export const startRemoveGame = ({ id } = {}) => {
     };
 };
 
-export const setGames = (games) => ({
-    type: 'SET_GAMES',
-    games
+export const editGame = (id, updates) => ({
+    type: 'EDIT_GAME',
+    id,
+    updates
 });
 
-export const startSetGames = () => {
+export const startEditGroup = (id, updates) => {
     return (dispatch) => {
-        return database.ref('games').once('value').then((snapshot) => {
-            const games = [];
-
-            snapshot.forEach((childSnapshot) => {
-                games.push({
-                    id: childSnapshot.key,
-                    ...childSnapshot.val()
-                });
-            });
-
-            dispatch(setGames(games));
+        return database.ref(`games/${id}`).update(updates).then(() => {
+            dispatch(editGame(id, updates));
         });
-    };
+    }
 };
-
-

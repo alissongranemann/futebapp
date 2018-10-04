@@ -63,6 +63,7 @@ module.exports = (env) => {
             compress: true,
             historyApiFallback: true,
             publicPath: '/dist/',
+            port: 3000,
             watchContentBase: true,
             watchOptions: {
                 ignored: /node_modules/

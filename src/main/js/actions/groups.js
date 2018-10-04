@@ -1,4 +1,4 @@
-import database from 'firebase/firebase'
+import database from 'service/firebase'
 import { addGame } from './games';
 import { addPlayer } from './players';
 

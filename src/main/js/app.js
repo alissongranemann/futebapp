@@ -5,7 +5,7 @@ import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetGroups } from './actions/groups';
 import { login, logout } from './actions/auth'
-import { firebase } from 'firebase/firebase';
+import { firebase } from 'service/firebase';
 
 const store = configureStore();
 

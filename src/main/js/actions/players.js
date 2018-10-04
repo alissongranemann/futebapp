@@ -1,4 +1,4 @@
-import database from 'firebase/firebase'
+import database from 'service/firebase'
 
 export const addPlayer = (player) => ({
     type: 'ADD_PLAYER',
