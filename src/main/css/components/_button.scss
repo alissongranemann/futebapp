@@ -1,0 +1,65 @@
+.face_btn,
+.google_btn {
+  font-size: 18px;
+  line-height: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  height: 70px;
+  border-radius: 10px;
+  box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s;
+  position: relative;
+  z-index: 1;
+  width: calc((100% - 20px) / 2);
+}
+
+.face_btn::before,
+.google_btn::before {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  background: #555555;
+  opacity: 0;
+  transition: all 0.4s;
+}
+
+.google_btn {
+  color: #fff;
+  background-color: #dd4b39;
+}
+
+.google_btn i {
+  font-size: 30px;
+  margin-right: 17px;
+  padding-bottom: 3px;
+}
+
+.face_btn:hover:before,
+.google_btn:hover:before {
+  color:white;
+  opacity:0.8;
+}
+
+.face_btn:hover,
+.google_btn:hover {
+  color: #fff;
+}
+
+.face_btn {
+  color: #fff;
+  background-color: #3b5998;
+}
+
+.face_btn i {
+  font-size: 30px;
+  margin-right: 17px;
+  padding-bottom: 3px;
+}
