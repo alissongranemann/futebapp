@@ -4,14 +4,28 @@ import GroupListItem from './GroupListItem';
 import { Link } from 'react-router-dom';
 
 const GroupList = (props) => (
-    <div>
-        <h3>Grupos</h3>
-        {props.groups.map((group) => {
-            return <GroupListItem key={group.id} {...group} />;
-        })}
-        <Link to='/group/create/'>
-            <button>Criar grupo</button>
-        </Link>
+    <div className="content-container">
+        <div className="list__title">
+            <h3>Seus grupos</h3>
+        </div>
+        <div className="list-body">
+        {
+            props.groups.length === 0 ? (
+                <div className="list-item list-item--message">
+                    <span>Sem grupos</span>
+                </div>
+            ) : (
+                props.groups.map((group) => {
+                    return <GroupListItem key={group.id} {...group} />;
+                })
+            )
+        }
+        </div>
+        <div className="list-footer">
+            <Link to='/group/create/'>
+                <button class="button">Criar grupo</button>
+            </Link>
+        </div>
     </div>
 );
 

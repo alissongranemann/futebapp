@@ -1,0 +1,50 @@
+.list__title {
+  font-size: 40px;
+  letter-spacing: -1px;
+  line-height: 44px;
+  text-align: left;
+  padding: 3.2rem 0;
+}
+
+.list-body {
+  margin-bottom: $l-size;
+}
+
+.list-item {
+  box-shadow: 0 2px 0 0 #e1e1e1;
+  border-radius: 5px;
+  border: 1px solid #e2e2e2;
+  color: $dark-grey;
+  display: flex;
+  flex-direction: column;
+  padding: 15px 37px 15px 28px;
+  text-decoration: none;
+  transition: background .3s ease;
+  &:hover {
+    background: $off-white;
+  }
+}
+
+.list-item--message {
+  align-items: center;
+  color: $grey;
+  justify-content: center;
+  padding: $m-size;
+  &:hover {
+    background: none;
+  }
+}
+
+.list-item__title {
+  margin: 0;
+  word-break: break-all;
+}
+
+.list-item__sub-title {
+  color: $grey;
+  font-size: $font-size-small;
+}
+
+.list-footer {
+  float: right;
+}
