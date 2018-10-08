@@ -4,20 +4,34 @@ import GameListItem from './GameListItem';
 import { Link } from 'react-router-dom';
 
 const GameList = (props) => (
-  <div>
-    <h3>Peladas</h3>
-    {props.games.map((game) => {
-        return <GameListItem key={game.id} {...game} />;
-    })}
-    <Link to={`/group/${props.groupId}/game/create/`}>
-        <button>Criar pelada</button>
-    </Link>
-  </div>
+    <div className="content-container">
+        <div className="list__title">
+            <h3>Peladas</h3>
+        </div>
+        <div className="list-body">
+            {
+                props.games.length === 0 ? (
+                    <div className="list-item list-item--message">
+                        <span>Sem peladas</span>
+                    </div>
+                ) : (
+                    props.games.map((game) => {
+                        return <GameListItem key={game.id} {...game} />;
+                    })
+                )
+            }
+        </div>
+        <div className="list-footer">
+            <Link to={`/group/${props.groupId}/game/create/`}>
+                <button className="button">Criar pelada</button>
+            </Link>
+        </div>
+    </div>
 );
 
 const mapStateToProps = (state) => {
     return {
-      games: state.games
+        games: state.games
     };
 };
 

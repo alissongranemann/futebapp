@@ -1,13 +1,14 @@
 .list__title {
-  font-size: 40px;
+  font-size: 25px;
   letter-spacing: -1px;
   line-height: 44px;
   text-align: left;
   padding: 3.2rem 0;
+  text-transform: uppercase;
 }
 
 .list-body {
-  margin-bottom: $l-size;
+  margin-bottom: $m-size;
 }
 
 .list-item {
@@ -20,7 +21,7 @@
   padding: 15px 37px 15px 28px;
   text-decoration: none;
   transition: background .3s ease;
-  &:hover {
+  &:hover a {
     background: $off-white;
   }
 }
@@ -47,4 +48,5 @@
 
 .list-footer {
   float: right;
+  margin: 15px 0;
 }
