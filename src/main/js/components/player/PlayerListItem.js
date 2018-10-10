@@ -1,15 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startRemovePlayer } from 'actions/players'
+import { Link } from 'react-router-dom';
+import { startRemovePlayer } from 'actions/players';
 
-const PlayerListItem = (props) => (
-    <div className="list-item">
-        <div>
-            <h3 className="list-item__title">{props.name}</h3>
-        </div>
-        {/* <button type="button" onClick={props.startRemovePlayer(props.id)}>-</button> */}
-    </div>
-);
+export class PlayerListItem extends React.Component {
+
+    render() {
+        return (
+            <Link className="list-item" to={`/player/edit/${this.props.id}`}>
+                <div>
+                    <h3 className="list-item__title">{this.props.name}</h3>
+                </div>
+                {/* <button type="button" onClick={props.startRemoveGame(props.id)}>-</button> */}
+            </Link>
+        );
+    }
+
+}
 
 const mapDispatchToProps = (dispatch) => ({
     startRemovePlayer: (id) => () => dispatch(startRemovePlayer({ id }))

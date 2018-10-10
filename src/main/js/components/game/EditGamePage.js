@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import GameForm from './GameForm';
 import { startEditGame } from 'actions/games';
 
-export class EditGroupPage extends React.Component {
+export class EditGamePage extends React.Component {
 
     onSubmit = (game) => {
         this.props.startEditGame(this.props.game.id, game);
@@ -39,7 +39,7 @@ const mapStateToProps = (state, props) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    startEditGroup: (id, group) => dispatch(startEditGroup(id, group)),
+    startEditGame: (id, game) => dispatch(startEditGame(id, game)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EditGroupPage);
+export default connect(mapStateToProps, mapDispatchToProps)(EditGamePage);

@@ -34,6 +34,20 @@ export const startRemovePlayer = ({ id } = {}) => {
     };
 };
 
+export const editPlayer = (id, updates) => ({
+    type: 'EDIT_PLAYER',
+    id,
+    updates
+});
+
+export const startEditPlayer = (id, updates) => {
+    return (dispatch) => {
+        return database.ref(`players/${id}`).update(updates).then(() => {
+            dispatch(editPlayer(id, updates));
+        });
+    }
+};
+
 export const setPlayers = (players) => ({
     type: 'SET_PLAYERS',
     players
