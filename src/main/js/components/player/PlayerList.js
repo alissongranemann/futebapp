@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 
 const PlayerList = (props) => (
     <div className="content-container">
-        <div className="list__title">
-            <h3>Jogadores</h3>
-        </div>
+        <h3 className="list__title">Jogadores</h3>
         <div className="list-body">
             {
                 props.players.length === 0 ? (

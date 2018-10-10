@@ -1,9 +1,9 @@
 .list__title {
-  font-size: 25px;
+  font-size: 30px;
   letter-spacing: -1px;
   line-height: 44px;
   text-align: left;
-  padding: 3.2rem 0;
+  padding: 1.6rem 0;
   text-transform: uppercase;
 }
 
@@ -17,11 +17,12 @@
   border: 1px solid #e2e2e2;
   color: $dark-grey;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 15px 37px 15px 28px;
   text-decoration: none;
   transition: background .3s ease;
-  &:hover a {
+  &:hover {
     background: $off-white;
   }
 }

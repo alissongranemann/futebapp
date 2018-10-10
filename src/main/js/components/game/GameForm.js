@@ -14,17 +14,17 @@ export default class GameForm extends React.Component {
             date: props.game ? moment(props.game.date) : moment(),
             schedule: props.game ? moment(props.game.schedule) : moment(),
             availablePlayers: props.players,
-            teams: props.game ? props.game.teams : [
+            teams: [
                 {
-                    name: "Time A", 
+                    name: "Time A",
                     players: [
                         {
                             name: ''
                         }
                     ]
-                }, 
+                },
                 {
-                    name: "Time B", 
+                    name: "Time B",
                     players: [
                         {
                             name: ''
@@ -55,7 +55,7 @@ export default class GameForm extends React.Component {
         var team = teams.find((team) => team.name === value.teamName);
         team.players = [...team.players, selectedPlayer];
         var availablePlayers = this.state.availablePlayers.filter(player => value.name !== player.name);
-        this.setState(() => ({availablePlayers, teams}));
+        this.setState(() => ({ availablePlayers, teams }));
     };
     onSubmit = (e) => {
         e.preventDefault();
@@ -65,22 +65,23 @@ export default class GameForm extends React.Component {
             this.setState(() => ({ error: '' }));
             this.props.onSubmit({
                 location: this.state.location,
-                date : this.state.date.valueOf(),
-                schedule : this.state.schedule.valueOf()
+                date: this.state.date.valueOf(),
+                schedule: this.state.schedule.valueOf()
             });
         }
     };
     render() {
         return (
-            <div>
+            <form className="form" onSubmit={this.onSubmit}>
                 {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Localização"
-                        value={this.state.location}
-                        onChange={this.onLocationChange}
-                    />
+                <input
+                    type="text"
+                    className="text-input"
+                    placeholder="Localização"
+                    value={this.state.location}
+                    onChange={this.onLocationChange}
+                />
+                <div>
                     <DatePicker
                         selected={this.state.date}
                         onChange={this.onDateChange}
@@ -94,18 +95,20 @@ export default class GameForm extends React.Component {
                         dateFormat="LT"
                         timeCaption="Time"
                     />
-                    {this.state.teams.map((team, index) => (
-                        <TeamComponent
-                            key={index} 
-                            name={team.name}
-                            availablePlayers={this.state.availablePlayers}
-                            teamPlayers={team.players}
-                            onPlayerChange={this.onPlayerChange}
-                        />
-                    ))}
-                    <div><button>Salvar</button></div>
-                </form>
-            </div>
+                </div>
+                {this.state.teams.map((team, index) => (
+                    <TeamComponent
+                        key={index}
+                        name={team.name}
+                        availablePlayers={this.state.availablePlayers}
+                        teamPlayers={team.players}
+                        onPlayerChange={this.onPlayerChange}
+                    />
+                ))}
+                <div className="form-footer">
+                    <button className="button">Salvar</button>
+                </div>
+            </form>
         )
     }
 }

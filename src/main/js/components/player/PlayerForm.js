@@ -27,18 +27,19 @@ export default class PlayerForm extends React.Component {
     };
     render() {
         return (
-            <div>
+            <form className="form" onSubmit={this.onSubmit}>
                 {this.state.error && <p>{this.state.error}</p>}
-                <form onSubmit={this.onSubmit}>
-                    <input
-                        type="text"
-                        placeholder="Nome"
-                        value={this.state.name}
-                        onChange={this.onNameChange}
-                    />
-                    <button>Salvar</button>
-                </form>
-            </div>
+                <input
+                    type="text"
+                    className="text-input"
+                    placeholder="Nome"
+                    value={this.state.name}
+                    onChange={this.onNameChange}
+                />
+                <div className="form-footer">
+                    <button className="button">Salvar</button>
+                </div>
+            </form>
         )
     }
 }

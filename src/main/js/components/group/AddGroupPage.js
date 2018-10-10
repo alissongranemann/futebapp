@@ -3,20 +3,33 @@ import { connect } from 'react-redux';
 import GroupForm from './GroupForm';
 import { startAddGroup } from 'actions/groups';
 
-const AddGroupPage = (props) => (
-  <div>
-    <h1>Criar grupo</h1>
-    <GroupForm
-      onSubmit={(group) => {
-        props.startAddGroup(group);
-        props.history.push('/');
-      }}
-    />
-  </div>
-);
+export class AddGroupPage extends React.Component {
+
+    onSubmit = (group) => {
+        this.props.startAddGroup(group);
+        this.props.history.push('/');
+    };
+
+    render() {
+        return (
+            <div>
+                <div className="page-header">
+                    <div className="content-container">
+                        <h1 className="page-header__title">Criar grupo</h1>
+                    </div>
+                </div>
+                <div className="content-container">
+                    <GroupForm
+                        onSubmit={this.onSubmit}
+                    />
+                </div>
+            </div>
+        );
+    }
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddGroup: (group) => dispatch(startAddGroup(group))
+    startAddGroup: (group) => dispatch(startAddGroup(group))
 });
 
 export default connect(undefined, mapDispatchToProps)(AddGroupPage);

@@ -3,22 +3,36 @@ import { connect } from 'react-redux';
 import GameForm from './GameForm';
 import { startAddGame } from 'actions/games';
 
-const AddGamePage = (props) => (
-    <div>
-        <h1>Criar Pelada</h1>
-        <GameForm
-            onSubmit={(game) => {
-                props.startAddGame(props.match.params.groupId, game);
-                props.history.push(`/group/${props.match.params.groupId}`);
-            }}
-            players={props.players}
-        />
-    </div>
-);
+export class AddGamePage extends React.Component {
+
+    onSubmit = (group) => {
+        this.props.startAddGame(this.props.match.params.groupId, game);
+        this.props.history.push(`/group/${this.props.match.params.groupId}`);
+    };
+
+    render() {
+        return (
+            <div>
+                <div className="page-header">
+                    <div className="content-container">
+                        <h1 className="page-header__title">Criar pelada</h1>
+                    </div>
+                </div>
+                <div className="content-container">
+                    <GameForm
+                        onSubmit={this.onSubmit}
+                        players={this.props.players}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+}
 
 const mapStateToProps = (state) => {
     return {
-      players: state.players
+        players: state.players
     };
 };
 

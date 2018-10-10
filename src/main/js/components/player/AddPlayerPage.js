@@ -3,20 +3,35 @@ import { connect } from 'react-redux';
 import PlayerForm from './PlayerForm';
 import { startAddPlayer } from 'actions/players';
 
-const AddPlayerPage = (props) => (
-  <div>
-    <h1>Criar jogador</h1>
-    <PlayerForm
-      onSubmit={(player) => {
-        props.startAddPlayer(props.match.params.groupId, player);
-        props.history.push(`/group/${props.match.params.groupId}`);
-      }}
-    />
-  </div>
-);
+export class AddPlayerPage extends React.Component {
+
+    onSubmit = (player) => {
+        this.props.startAddPlayer(this.props.match.params.groupId, player);
+        this.props.history.push(`/group/${this.props.match.params.groupId}`);
+    };
+
+    render() {
+        return (
+            <div>
+                <h1></h1>
+                <div className="page-header">
+                    <div className="content-container">
+                        <h1 className="page-header__title">Criar jogador</h1>
+                    </div>
+                </div>
+                <div className="content-container">
+                    <PlayerForm
+                        onSubmit={this.onSubmit}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+}
 
 const mapDispatchToProps = (dispatch) => ({
-  startAddPlayer: (groupId, player) => dispatch(startAddPlayer(groupId, player))
+    startAddPlayer: (groupId, player) => dispatch(startAddPlayer(groupId, player))
 });
 
 export default connect(undefined, mapDispatchToProps)(AddPlayerPage);

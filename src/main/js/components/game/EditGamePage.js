@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import GroupForm from './GroupForm';
-import { startEditGroup } from 'actions/groups';
+import GameForm from './GameForm';
+import { startEditGame } from 'actions/games';
 
 export class EditGroupPage extends React.Component {
 
-    onSubmit = (group) => {
-        this.props.startEditGroup(this.props.group.id, group);
+    onSubmit = (game) => {
+        this.props.startEditGame(this.props.game.id, game);
         this.props.history.push('/');
     };
 
@@ -15,13 +15,14 @@ export class EditGroupPage extends React.Component {
             <div>
                 <div className="page-header">
                     <div className="content-container">
-                        <h1 className="page-header__title">Editar grupo</h1>
+                        <h1 className="page-header__title">Editar pelada</h1>
                     </div>
                 </div>
                 <div className="content-container">
-                    <GroupForm
-                        group={this.props.group}
+                    <GameForm
+                        game={this.props.game}
                         onSubmit={this.onSubmit}
+                        players={this.props.players}
                     />
                 </div>
             </div>
@@ -32,7 +33,8 @@ export class EditGroupPage extends React.Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        group: state.groups.find((group) => group.id === props.match.params.id)
+        players: [],
+        game: state.games.find((game) => game.id === props.match.params.id)
     };
 };
 

@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 
 const GroupList = (props) => (
     <div className="content-container">
-        <div className="list__title">
-            <h3>Seus grupos</h3>
-        </div>
+        <h3 className="list__title">Seus grupos</h3>
         <div className="list-body">
         {
             props.groups.length === 0 ? (
@@ -23,7 +21,7 @@ const GroupList = (props) => (
         </div>
         <div className="list-footer">
             <Link to='/group/create/'>
-                <button class="button">Criar grupo</button>
+                <button className="button">Criar grupo</button>
             </Link>
         </div>
     </div>
