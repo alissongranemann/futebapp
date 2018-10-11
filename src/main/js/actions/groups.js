@@ -62,6 +62,7 @@ export const setGroups = (groups) => ({
 
 export const startSetGroups = () => {
     return (dispatch, getState) => {
+        dispatch(setGroups([]));
         const user = getState().auth.uid;
         return database.ref('users').child(`${user}/groups`).once('value').then((userGroupsSnapshot) => {
             var groupPromises = [];
