@@ -9,6 +9,17 @@ export default (state = gamesReducerDefaultState, action) => {
             ];
         case 'REMOVE_GAME':
             return state.filter(({ id }) => id !== action.id);
+        case 'EDIT_GAME':
+            return state.map((game) => {
+                if (game.id === action.id) {
+                    return {
+                        ...game,
+                        ...action.updates
+                    };
+                } else {
+                    return game;
+                };
+            });
         case 'SET_GAMES':
             return action.games;
         default:

@@ -42,7 +42,7 @@ export const editGame = (id, updates) => ({
     updates
 });
 
-export const startEditGroup = (id, updates) => {
+export const startEditGame = (id, updates) => {
     return (dispatch) => {
         return database.ref(`games/${id}`).update(updates).then(() => {
             dispatch(editGame(id, updates));

@@ -7,7 +7,7 @@ export class AddGamePage extends React.Component {
 
     onSubmit = (group) => {
         this.props.startAddGame(this.props.match.params.groupId, game);
-        this.props.history.push(`/group/${this.props.match.params.groupId}`);
+        this.props.history.goBack();
     };
 
     render() {

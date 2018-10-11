@@ -7,7 +7,7 @@ export class AddPlayerPage extends React.Component {
 
     onSubmit = (player) => {
         this.props.startAddPlayer(this.props.match.params.groupId, player);
-        this.props.history.push(`/group/${this.props.match.params.groupId}`);
+        this.props.history.goBack();
     };
 
     render() {

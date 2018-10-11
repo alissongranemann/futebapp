@@ -7,7 +7,7 @@ export class EditPlayerPage extends React.Component {
 
     onSubmit = (player) => {
         this.props.startEditPlayer(this.props.player.id, player);
-        this.props.history.push('/');
+        this.props.history.goBack();
     };
 
     render() {

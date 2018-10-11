@@ -7,7 +7,7 @@ export class EditGamePage extends React.Component {
 
     onSubmit = (game) => {
         this.props.startEditGame(this.props.game.id, game);
-        this.props.history.push('/');
+        this.props.history.goBack();
     };
 
     render() {
