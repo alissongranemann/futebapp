@@ -14,7 +14,11 @@ const PlayerList = (props) => (
                     </div>
                 ) : (
                     props.players.map((player) => {
-                        return <PlayerListItem key={player.id} {...player} />;
+                        return <PlayerListItem 
+                                    key={player.id}
+                                    groupId={props.groupId}
+                                    {...player} 
+                                />;
                     })
                 )
             }

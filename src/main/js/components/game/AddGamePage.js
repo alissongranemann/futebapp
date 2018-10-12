@@ -5,7 +5,7 @@ import { startAddGame } from 'actions/games';
 
 export class AddGamePage extends React.Component {
 
-    onSubmit = (group) => {
+    onSubmit = (game) => {
         this.props.startAddGame(this.props.match.params.groupId, game);
         this.props.history.goBack();
     };

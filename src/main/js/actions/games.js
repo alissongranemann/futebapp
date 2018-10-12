@@ -12,7 +12,7 @@ export const startAddGame = (groupId = '', gameData = {}) => {
             date = '',
             schedule = ''
         } = gameData;
-        const game = { location, date, schedule };
+        const game = { location, date, schedule, group: groupId };
         return database.ref("games").push(game).then((ref) => {
             database.ref(`groups/${groupId}/games/${ref.key}`).set(true);
             dispatch(addGame({
@@ -28,9 +28,10 @@ export const removeGame = ({ id } = {}) => ({
     id
 });
 
-export const startRemoveGame = ({ id } = {}) => {
+export const startRemoveGame = ({ id, groupId } = {}) => {
     return (dispatch) => {
         return database.ref(`games/${id}`).remove().then(() => {
+            database.ref(`groups/${groupId}/games/${id}`).remove();
             dispatch(removeGame({ id }));
         });
     };

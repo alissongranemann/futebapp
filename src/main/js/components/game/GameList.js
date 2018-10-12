@@ -14,7 +14,11 @@ const GameList = (props) => (
                     </div>
                 ) : (
                     props.games.map((game) => {
-                        return <GameListItem key={game.id} {...game} />;
+                        return <GameListItem 
+                                    key={game.id}
+                                    groupId={props.groupId}
+                                    {...game} 
+                                />;
                     })
                 )
             }

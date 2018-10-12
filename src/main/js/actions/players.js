@@ -10,7 +10,7 @@ export const startAddPlayer = (groupId = '', playerData = {}) => {
         const {
             name = ''
         } = playerData;
-        const player = { name };
+        const player = { name, group: groupId };
         return database.ref("players").push(player).then((ref) => {
             database.ref(`groups/${groupId}/players/${ref.key}`).set(true);
             dispatch(addPlayer({
@@ -26,10 +26,11 @@ export const removePlayer = ({ id } = {}) => ({
     id
 });
 
-export const startRemovePlayer = ({ id } = {}) => {
+export const startRemovePlayer = ({ id, groupId } = {}) => {
     return (dispatch) => {
         return database.ref(`players/${id}`).remove().then(() => {
             dispatch(removePlayer({ id }));
+            database.ref(`groups/${groupId}/players/${id}`).remove();
         });
     };
 };

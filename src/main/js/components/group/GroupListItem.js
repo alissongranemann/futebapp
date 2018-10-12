@@ -5,14 +5,9 @@ import { startRemoveGroup } from 'actions/groups';
 
 export class GroupListItem extends React.Component {
     
-    constructor(props) {
-        super(props);
-    }
-
     onRemove = (e) => {
+        e.preventDefault();
         this.props.startRemoveGroup({ id: this.props.id });
-        this.props.history.push('/');
-        e.stopPropagation();
     };
 
     render() {
@@ -21,7 +16,7 @@ export class GroupListItem extends React.Component {
                 <div>
                     <h3 className="list-item__title">{this.props.name}</h3>
                 </div>
-                <button onClick={this.onRemove}>Remove</button>
+                <img className="delete-button" src="/images/icons/delete-button.svg" onClick={this.onRemove} />
             </Link>
         );
     }

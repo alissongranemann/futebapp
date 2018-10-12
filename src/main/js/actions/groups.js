@@ -96,6 +96,6 @@ export const startSetGroups = () => {
                 groupPromises.push(groupPromise);
             });
             return Promise.all(groupPromises);
-        });
+        })
     };
 };

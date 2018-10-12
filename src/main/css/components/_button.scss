@@ -104,3 +104,11 @@
   margin-right: 17px;
   padding-bottom: 3px;
 }
+
+.delete-button {
+  height: 24px;
+  width: 24px;
+  &:hover {
+    opacity: .7;
+  }
+}
