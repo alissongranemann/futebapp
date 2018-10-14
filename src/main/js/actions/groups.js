@@ -64,7 +64,7 @@ export const startSetGroups = () => {
     return (dispatch, getState) => {
         const user = getState().auth.uid;
         return database.ref('users').child(`${user}/groups`).once('value').then((userGroupsSnapshot) => {
-            var promises = [];
+            var userPromises = [];
             userGroupsSnapshot.forEach(function (userGroupSnapshot) {
                 var groupPromise = database.ref('groups').child(userGroupSnapshot.key).once('value').then((groupSnapshot) => {
                     var groupPromises = [];
@@ -94,11 +94,11 @@ export const startSetGroups = () => {
                         });
                         groupPromises.push(playerPromise);
                     }
-                    // return Promise.all(groupPromises);
+                    return Promise.all(groupPromises);
                 });
-                promises.push(groupPromise);
+                userPromises.push(groupPromise);
             });
-            return Promise.all(groupPromises);
+            return Promise.all(userPromises);
         })
     };
 };
