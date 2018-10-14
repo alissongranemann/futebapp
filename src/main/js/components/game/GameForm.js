@@ -8,6 +8,17 @@ import TeamComponent from '../team/TeamComponent';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-times/css/material/default.css';
 
+const defaultTeams = [
+    {
+        name: "Time A",
+        players: []
+    },
+    {
+        name: "Time B",
+        players: []
+    }
+]
+
 export class GameForm extends React.Component {
     constructor(props) {
         super(props);
@@ -16,25 +27,8 @@ export class GameForm extends React.Component {
             location: props.game ? props.game.location : '',
             date: props.game ? moment(props.game.date) : moment(),
             time: props.game ? moment(props.game.time) : moment(),
-            availablePlayers: props.players,
-            teams: [
-                {
-                    name: "Time A",
-                    players: [
-                        {
-                            name: ''
-                        }
-                    ]
-                },
-                {
-                    name: "Time B",
-                    players: [
-                        {
-                            name: ''
-                        }
-                    ]
-                }
-            ],
+            availablePlayers: props.game ? props.game.availablePlayers : props.players,
+            teams: props.game ? props.game.teams : defaultTeams,
             error: ''
         };
     }
@@ -68,7 +62,9 @@ export class GameForm extends React.Component {
             this.props.onSubmit({
                 location: this.state.location,
                 date: this.state.date.valueOf(),
-                time: this.state.time.valueOf()
+                time: this.state.time.valueOf(),
+                teams: this.state.teams,
+                availablePlayers: this.state.availablePlayers
             });
         }
     };
@@ -98,7 +94,7 @@ export class GameForm extends React.Component {
                 {this.state.teams.map((team, index) => (
                     <TeamComponent
                         key={index}
-                        index={index}
+                        teamIndex={index}
                         name={team.name}
                         availablePlayers={this.state.availablePlayers}
                         teamPlayers={team.players}

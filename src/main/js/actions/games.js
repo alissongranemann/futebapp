@@ -10,9 +10,11 @@ export const startAddGame = (groupId = '', gameData = {}) => {
         const {
             location = '',
             date = '',
-            time = ''
+            time = '',
+            teams = [],
+            availablePlayers = []
         } = gameData;
-        const game = { location, date, time, group: groupId };
+        const game = { location, date, time, teams, availablePlayers, group: groupId };
         return database.ref("games").push(game).then((ref) => {
             database.ref(`groups/${groupId}/games/${ref.key}`).set(true);
             dispatch(addGame({
