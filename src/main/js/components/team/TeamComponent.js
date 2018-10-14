@@ -1,25 +1,42 @@
 import React from 'react';
-import Select from 'react-select'
 
-export default class TeamComponent extends React.Component {
+export class TeamComponent extends React.Component {
+
+    onChange = event => {
+        this.props.onPlayerChange(event.target.value, this.props.index);
+    }
+
     render() {
         return (
-            <div>
+            <div className="team-wrapper">
                 <h3>{this.props.name}</h3>
-                {this.props.teamPlayers.map((player, index) => (
-                    <Select
-                        key={index}
-                        value={player}
-                        options={this.props.availablePlayers.map((player) => {
-                            return {
-                                value: {teamName: this.props.name, ...player}, 
-                                label: player.name
+                {
+                    this.props.teamPlayers.map((player, index) => (
+                        <select
+                            key={index}
+                            value={player.name}
+                            onChange={this.onChange}
+                            className="select"
+                        >
+                            <option value={player.name}>{player.name}</option>
+                            {
+                                this.props.availablePlayers.map((player, index) => {
+                                    return (
+                                        <option
+                                            key={index}
+                                            value={player.name}
+                                        >
+                                            {player.name}
+                                        </option>
+                                    );
+                                })
                             }
-                        })} 
-                        onChange={this.props.onPlayerChange}
-                    />
-                ))}
+                        </select>
+                    ))
+                }
             </div>
         )
     }
 }
+
+export default TeamComponent;

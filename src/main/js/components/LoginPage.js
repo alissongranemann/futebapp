@@ -12,7 +12,7 @@ export const LoginPage = ({ startLoginGoogle, startLoginFacebook }) => (
                 <a 
                     className="google_btn" 
                     onClick={startLoginGoogle}>
-                    <i className="fa fa-google"></i>
+                    <img src="images/icons/icon-google.png" alt="GOOGLE" />                    
                     Google
                 </a>
                 <a 

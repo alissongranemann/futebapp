@@ -14,15 +14,17 @@ export class EditGamePage extends React.Component {
         return (
             <div>
                 <div className="page-header">
-                    <div className="content-container">
+                <div className="content-container page-header__action">
                         <h1 className="page-header__title">Editar pelada</h1>
+                        <button className="header-action-button-wrapper" onClick={this.props.history.goBack}>
+                            <img className="header-action-button" src="/images/icons/cancel-button.svg" />
+                        </button>
                     </div>
                 </div>
                 <div className="content-container">
                     <GameForm
                         game={this.props.game}
                         onSubmit={this.onSubmit}
-                        players={this.props.players}
                     />
                 </div>
             </div>
@@ -33,7 +35,6 @@ export class EditGamePage extends React.Component {
 
 const mapStateToProps = (state, props) => {
     return {
-        players: [],
         game: state.games.find((game) => game.id === props.match.params.id)
     };
 };

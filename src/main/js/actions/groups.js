@@ -62,12 +62,12 @@ export const setGroups = (groups) => ({
 
 export const startSetGroups = () => {
     return (dispatch, getState) => {
-        dispatch(setGroups([]));
         const user = getState().auth.uid;
         return database.ref('users').child(`${user}/groups`).once('value').then((userGroupsSnapshot) => {
-            var groupPromises = [];
+            var promises = [];
             userGroupsSnapshot.forEach(function (userGroupSnapshot) {
                 var groupPromise = database.ref('groups').child(userGroupSnapshot.key).once('value').then((groupSnapshot) => {
+                    var groupPromises = [];
                     var value = groupSnapshot.val();
                     const group = {
                         id: groupSnapshot.key,
@@ -75,25 +75,28 @@ export const startSetGroups = () => {
                     };
                     dispatch(addGroup(group));
                     for (var key in value.games){
-                        database.ref('games').child(key).once('value').then((gameSnapshot) => {
+                        var gamePromise = database.ref('games').child(key).once('value').then((gameSnapshot) => {
                             const game = {
                                 id: gameSnapshot.key,
                                 ...gameSnapshot.val()
                             };
                             dispatch(addGame(game));
                         });
+                        groupPromises.push(gamePromise);
                     }
                     for (var key in value.players) {
-                        database.ref('players').child(key).once('value').then((playerSnapshot) => {
+                        var playerPromise = database.ref('players').child(key).once('value').then((playerSnapshot) => {
                             const player = {
                                 id: playerSnapshot.key,
                                 ...playerSnapshot.val()
                             };
                             dispatch(addPlayer(player));
                         });
+                        groupPromises.push(playerPromise);
                     }
+                    // return Promise.all(groupPromises);
                 });
-                groupPromises.push(groupPromise);
+                promises.push(groupPromise);
             });
             return Promise.all(groupPromises);
         })

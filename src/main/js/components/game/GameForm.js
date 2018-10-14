@@ -1,18 +1,21 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import moment from 'moment';
 import DatePicker from 'react-datepicker';
-
-import 'react-datepicker/dist/react-datepicker.css';
+import TimePicker from 'react-times';
 import TeamComponent from '../team/TeamComponent';
 
-export default class GameForm extends React.Component {
+import 'react-datepicker/dist/react-datepicker.css';
+import 'react-times/css/material/default.css';
+
+export class GameForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
             location: props.game ? props.game.location : '',
             date: props.game ? moment(props.game.date) : moment(),
-            schedule: props.game ? moment(props.game.schedule) : moment(),
+            time: props.game ? moment(props.game.time) : moment(),
             availablePlayers: props.players,
             teams: [
                 {
@@ -44,29 +47,28 @@ export default class GameForm extends React.Component {
             this.setState(() => ({ date }));
         }
     };
-    onScheduleChange = (schedule) => {
-        if (schedule) {
-            this.setState(() => ({ schedule }));
+    onTimeChange = (options) => {
+        if (options) {
+            this.setState(() => ({ time: moment(options.hour + ":" + options.minute, "HH:mm") }));
         }
     };
-    onPlayerChange = (selectedPlayer) => {
-        var value = selectedPlayer.value;
-        var teams = this.state.teams;
-        var team = teams.find((team) => team.name === value.teamName);
+    onPlayerChange = (value, teamIndex) => {
+        var team = this.state.teams[teamIndex];
+        var selectedPlayer = { name: value };
         team.players = [...team.players, selectedPlayer];
-        var availablePlayers = this.state.availablePlayers.filter(player => value.name !== player.name);
-        this.setState(() => ({ availablePlayers, teams }));
+        var availablePlayers = this.state.availablePlayers.filter(player => value !== player.name);
+        this.setState(() => ({ availablePlayers }));
     };
     onSubmit = (e) => {
         e.preventDefault();
-        if (!this.state.location || !this.state.date || !this.state.schedule) {
+        if (!this.state.location || !this.state.date || !this.state.time) {
             this.setState(() => ({ error: 'Preencha os campos obrigatórios.' }));
         } else {
             this.setState(() => ({ error: '' }));
             this.props.onSubmit({
                 location: this.state.location,
                 date: this.state.date.valueOf(),
-                schedule: this.state.schedule.valueOf()
+                time: this.state.time.valueOf()
             });
         }
     };
@@ -81,24 +83,22 @@ export default class GameForm extends React.Component {
                     value={this.state.location}
                     onChange={this.onLocationChange}
                 />
-                <div>
+                <div className="input-row">
                     <DatePicker
                         selected={this.state.date}
                         onChange={this.onDateChange}
+                        minDate={moment()}
+                        className="text-input__date"
                     />
-                    <DatePicker
-                        selected={this.state.schedule}
-                        onChange={this.onScheduleChange}
-                        showTimeSelect
-                        showTimeSelectOnly
-                        timeIntervals={30}
-                        dateFormat="LT"
-                        timeCaption="Time"
+                    <TimePicker
+                        time={this.state.time.format('HH:mm')}
+                        onTimeChange={this.onTimeChange}
                     />
                 </div>
                 {this.state.teams.map((team, index) => (
                     <TeamComponent
                         key={index}
+                        index={index}
                         name={team.name}
                         availablePlayers={this.state.availablePlayers}
                         teamPlayers={team.players}
@@ -112,3 +112,9 @@ export default class GameForm extends React.Component {
         )
     }
 }
+
+const mapStateToProps = (state) => ({
+    players: state.players
+});
+
+export default connect(mapStateToProps)(GameForm)

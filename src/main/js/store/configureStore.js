@@ -8,15 +8,22 @@ import authReducer from 'reducers/auth';
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
-    const store = createStore(
-        combineReducers({
-            groups: groupsReducer,
-            games: gamesReducer,
-            players: playersReducer,
-            auth: authReducer
-        }),
+    const appReducer = combineReducers({
+        groups: groupsReducer,
+        games: gamesReducer,
+        players: playersReducer,
+        auth: authReducer
+    });
+    const rootReducer = (state, action) => {
+        if (action.type === 'LOGOUT') {
+            state = undefined;
+        }
+        return appReducer(state, action);
+    }
+    const store = createStore(rootReducer,
         composeEnchancers(applyMiddleware(thunk))
     );
 
     return store;
 };
+

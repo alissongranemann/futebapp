@@ -49,6 +49,12 @@
 }
 
 .list-footer {
-  float: right;
   margin: 15px 0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.action-row {
+  display: flex;
+  flex-direction: row;
 }

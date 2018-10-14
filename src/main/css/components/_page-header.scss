@@ -1,17 +1,21 @@
 .page-header {
   background: $off-white;
   margin-bottom: $l-size;
-  padding: $l-size 0;
-}
-
-.page-header__actions {
-  margin-top: $m-size;
+  padding: 2rem 0;
 }
 
 .page-header__title {
   font-weight: 300;
   margin: 0;
+  text-transform: uppercase;
   span {
     font-weight: 700;
   }
+}
+
+.page-header__action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }

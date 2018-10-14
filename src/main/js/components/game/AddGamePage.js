@@ -14,14 +14,16 @@ export class AddGamePage extends React.Component {
         return (
             <div>
                 <div className="page-header">
-                    <div className="content-container">
+                <div className="content-container page-header__action">
                         <h1 className="page-header__title">Criar pelada</h1>
+                        <button className="header-action-button-wrapper" onClick={this.props.history.goBack}>
+                            <img className="header-action-button" src="/images/icons/cancel-button.svg" />
+                        </button>
                     </div>
                 </div>
                 <div className="content-container">
                     <GameForm
                         onSubmit={this.onSubmit}
-                        players={this.props.players}
                     />
                 </div>
             </div>
@@ -30,14 +32,8 @@ export class AddGamePage extends React.Component {
 
 }
 
-const mapStateToProps = (state) => {
-    return {
-        players: state.players
-    };
-};
-
 const mapDispatchToProps = (dispatch) => ({
     startAddGame: (groupId, game) => dispatch(startAddGame(groupId, game))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddGamePage);
+export default connect(undefined, mapDispatchToProps)(AddGamePage);

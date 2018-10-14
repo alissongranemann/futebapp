@@ -4,7 +4,7 @@ import createBrowserHistory from 'history/createBrowserHistory'
 import GroupDashboardPage from 'components/GroupDashboardPage';
 import AddGroupPage from 'components/group/AddGroupPage';
 import EditGroupPage from 'components/group/EditGroupPage';
-import GroupPage from 'components/group/GroupPage';
+import ViewGroupPage from 'components/group/ViewGroupPage';
 import NotFoundPage from 'components/NotFoundPage';
 import AddGamePage from 'components/game/AddGamePage';
 import EditGamePage from 'components/game/EditGamePage';
@@ -24,7 +24,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/dashboard" component={GroupDashboardPage} />
                 <PrivateRoute path="/group/create" component={AddGroupPage} />
                 <PrivateRoute path="/group/edit/:id" component={EditGroupPage} />
-                <PrivateRoute path="/group/:id" component={GroupPage} exact={true} />
+                <PrivateRoute path="/group/:id" component={ViewGroupPage} exact={true} />
                 <PrivateRoute path="/group/:groupId/game/create" component={AddGamePage} />
                 <PrivateRoute path="/game/edit/:id" component={EditGamePage} />
                 <PrivateRoute path="/group/:groupId/player/create" component={AddPlayerPage} />
