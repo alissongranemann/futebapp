@@ -1,38 +1,4 @@
-import { firebase, googleAuthProvider } from 'service/firebase';
-
-export const login = (uid) => ({
-    type: 'LOGIN',
-    uid
-});
-
-export const startLoginGoogle = () => {
-    return () => {
-        return firebase.auth().signInWithPopup(googleAuthProvider);
-    };
-};
-
-export const startLoginFacebook = () => {
-    return () => {
-        var facebookProvider = new firebase.auth.FacebookAuthProvider();
-        // .then(function(result) {
-        //     // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        //     var token = result.credential.accessToken;
-        //     // The signed-in user info.
-        //     var user = result.user;
-        //     // ...
-        //   }).catch(function(error) {
-        //     // Handle Errors here.
-        //     var errorCode = error.code;
-        //     var errorMessage = error.message;
-        //     // The email of the user's account used.
-        //     var email = error.email;
-        //     // The firebase.auth.AuthCredential type that was used.
-        //     var credential = error.credential;
-        //     // ...
-        // });
-        return firebase.auth().signInWithPopup(facebookProvider);
-    };
-};
+import { firebase } from 'service/firebase';
 
 export const logout = () => ({
     type: 'LOGOUT'
@@ -42,4 +8,52 @@ export const startLogout = () => {
     return () => {
         return firebase.auth().signOut();
     };
+};
+
+export const login = (uid) => ({
+    type: 'LOGIN',
+    uid
+});
+
+export const startLoginGoogle = () => {
+    return () => {
+        var googleProvider = new firebase.auth.GoogleAuthProvider();
+        return startLogin(googleProvider);
+    };
+};
+
+export const startLoginFacebook = () => {
+    return () => {
+        var facebookProvider = new firebase.auth.FacebookAuthProvider();
+        return startLogin(facebookProvider);
+    };
+};
+
+const startLogin = (provider) => {
+    return firebase.auth().signInWithPopup(provider).then(function (result) {
+        return Promise.resolve(result);
+    }).catch(function (error) {
+        if (error.code === 'auth/account-exists-with-different-credential') {
+            linkAccount(error.email, error.credential);
+        }
+    });
+};
+
+const linkAccount = (email, credential) => {
+    firebase.auth().fetchProvidersForEmail(email).then(function (providers) {
+        if (providers.length > 0) {
+            if (providers[0] == firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD) {
+                var googleProvider = new firebase.auth.GoogleAuthProvider();
+                firebase.auth().signInWithPopup(googleProvider).then(function (result) {
+                    result.user.linkAndRetrieveDataWithCredential(credential);
+                });
+            }
+            else if (providers[0] == firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD) {
+                var facebookProvider = new firebase.auth.FacebookAuthProvider();
+                firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
+                    result.user.linkAndRetrieveDataWithCredential(credential);
+                });
+            }
+        }
+    });
 };

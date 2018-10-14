@@ -8,17 +8,6 @@ import TeamComponent from '../team/TeamComponent';
 import 'react-datepicker/dist/react-datepicker.css';
 import 'react-times/css/material/default.css';
 
-const defaultTeams = [
-    {
-        name: "Time A",
-        players: []
-    },
-    {
-        name: "Time B",
-        players: []
-    }
-]
-
 export class GameForm extends React.Component {
     constructor(props) {
         super(props);
@@ -28,7 +17,16 @@ export class GameForm extends React.Component {
             date: props.game ? moment(props.game.date) : moment(),
             time: props.game ? moment(props.game.time) : moment(),
             availablePlayers: props.game ? props.game.availablePlayers : props.players,
-            teams: props.game ? props.game.teams : defaultTeams,
+            teams: props.game ? props.game.teams : [
+                {
+                    name: "Time A",
+                    players: []
+                },
+                {
+                    name: "Time B",
+                    players: []
+                }
+            ],
             error: ''
         };
     }

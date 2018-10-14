@@ -9,6 +9,9 @@
 
 .list-body {
   margin-bottom: $m-size;
+  > * {
+    margin-bottom: $s-size;
+  }
 }
 
 .list-item {
