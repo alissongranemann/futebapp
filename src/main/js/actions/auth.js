@@ -84,3 +84,22 @@ export const startLoginEmail = (signInData = {}) => {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     };
 };
+
+export const startResetPassword = (resetData = {}) => {
+    return () => {
+        const {
+            email = ''
+        } = resetData;
+        return firebase.auth().sendPasswordResetEmail(email);
+    };
+};
+
+export const startConfirmResetPassword = (resetData = {}) => {
+    return () => {
+        const {
+            code = '',
+            newPassword = ''
+        } = resetData;
+        return firebase.auth().confirmPasswordReset(code, newPassword);
+    };
+};

@@ -8,12 +8,14 @@ import ViewGroupPage from 'components/group/ViewGroupPage';
 import NotFoundPage from 'components/NotFoundPage';
 import AddGamePage from 'components/game/AddGamePage';
 import EditGamePage from 'components/game/EditGamePage';
-import AddPlayerPage from '../components/player/AddPlayerPage';
+import AddPlayerPage from 'components/player/AddPlayerPage';
 import LoginPage from 'components/LoginPage';
 import SignUpPage from 'components/SignUpPage';
 import EditPlayerPage from 'components/player/EditPlayerPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
+import ResetPasswordPage from 'components/ResetPasswordPage';
+import ConfirmResetPasswordPage from 'components/ConfirmResetPasswordPage';
 
 export const history = createBrowserHistory();
 
@@ -22,7 +24,9 @@ const AppRouter = () => (
         <div>
             <Switch>
                 <PublicRoute path="/" component={LoginPage} exact={true} />
-                <PublicRoute path="/signup" component={SignUpPage} exact={true} />
+                <PublicRoute path="/signup" component={SignUpPage} />
+                <PublicRoute path="/reset" component={ResetPasswordPage} exact={true} />
+                <PublicRoute path="/reset/confirm" component={ConfirmResetPasswordPage} />
                 <PrivateRoute path="/dashboard" component={GroupDashboardPage} />
                 <PrivateRoute path="/group/create" component={AddGroupPage} />
                 <PrivateRoute path="/group/edit/:id" component={EditGroupPage} />

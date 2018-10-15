@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startSignUp, } from 'actions/auth';
+import { startSignUp } from 'actions/auth';
 
 export class SignUpPage extends React.Component {
 
@@ -40,7 +40,7 @@ export class SignUpPage extends React.Component {
             this.setState(() => ({ error: '' }));
             this.props.startSignUp({
                 email: this.state.email,
-                password: this.state.password,
+                password: this.state.password
             });
         }
     };
@@ -50,7 +50,7 @@ export class SignUpPage extends React.Component {
             <div className="box-layout">
                 <div className="box-layout__wrap_box">
                     <span className="box-layout__title">
-                        Entrar
+                        Novo usuário
                     </span>
                         <form className="login-form" onSubmit={this.onSubmit}>
                             {this.state.error && <p>{this.state.error}</p>}

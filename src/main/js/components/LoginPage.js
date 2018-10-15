@@ -86,7 +86,7 @@ export class LoginPage extends React.Component {
                                 placeholder="Senha"
                                 onChange={this.onPasswordChange}
                             />
-                            <a onClick={this.onForgotPassword}>Esqueceu sua senha?</a>
+                            <Link to="/reset">Esqueceu sua senha?</Link>
                             <br />
                             <button className="button">Entrar</button>
                             <div className="login-footer">
