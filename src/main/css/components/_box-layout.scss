@@ -12,7 +12,7 @@
   text-align: center;
   width: 680px;
   box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
-  padding: 150px 110px 30px 110px;
+  padding: 150px 110px 10px 110px;
   position: relative;
   overflow: hidden;
 }
@@ -20,7 +20,10 @@
 .box-layout__box {
   justify-content: space-between;
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
+  > * {
+    margin-bottom: $l-size;
+  }
 }
 
 .box-layout__title {

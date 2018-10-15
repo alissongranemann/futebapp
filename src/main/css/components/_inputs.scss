@@ -33,6 +33,11 @@
   flex-direction: row;
 }
 
+.input-row__even {
+  @extend .input-row;
+  justify-content: space-between;
+}
+
 .react-datepicker__day-name,
 .react-datepicker__day,
 .react-datepicker__time-name {

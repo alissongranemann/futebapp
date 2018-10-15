@@ -24,3 +24,24 @@
     margin-bottom: .7rem;
   }
 }
+
+.login-form {
+  @extend .form;
+  a {
+    color: #26ca5e;
+    line-height: 1.4;
+    text-decoration: underline;
+    text-align: right;
+  }
+}
+
+.login-footer {
+  padding-top: 10rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  >* {
+    margin-right: .5rem;
+  }
+}

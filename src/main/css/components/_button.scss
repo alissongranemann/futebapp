@@ -39,7 +39,7 @@
   justify-content: center;
   align-items: center;
   padding: 15px;
-  height: 70px;
+  height: 60px;
   border-radius: 10px;
   box-shadow: 0 1px 5px 0px rgba(0, 0, 0, 0.2);
   transition: all 0.4s;
@@ -136,4 +136,10 @@
 .header-action-button {
   height: 25px;
   width: 25px;
+}
+
+.link {
+  @extend .button--link;
+  text-decoration: underline;
+  border: none;
 }

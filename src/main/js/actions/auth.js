@@ -30,30 +30,45 @@ export const startLoginFacebook = () => {
 };
 
 const startLogin = (provider) => {
-    return firebase.auth().signInWithPopup(provider).then(function (result) {
-        return Promise.resolve(result);
-    }).catch(function (error) {
+    return firebase.auth().signInWithPopup(provider).catch(function (error) {
         if (error.code === 'auth/account-exists-with-different-credential') {
-            linkAccount(error.email, error.credential);
+            return linkAccount(error.email, error.credential);
         }
     });
 };
 
 const linkAccount = (email, credential) => {
-    firebase.auth().fetchProvidersForEmail(email).then(function (providers) {
+    return firebase.auth().fetchProvidersForEmail(email).then(function (providers) {
         if (providers.length > 0) {
             if (providers[0] == firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD) {
                 var googleProvider = new firebase.auth.GoogleAuthProvider();
                 firebase.auth().signInWithPopup(googleProvider).then(function (result) {
-                    result.user.linkAndRetrieveDataWithCredential(credential);
+                    return result.user.linkAndRetrieveDataWithCredential(credential);
                 });
             }
-            else if (providers[0] == firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD) {
+            if (providers[0] == firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD) {
                 var facebookProvider = new firebase.auth.FacebookAuthProvider();
                 firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
-                    result.user.linkAndRetrieveDataWithCredential(credential);
+                    return result.user.linkAndRetrieveDataWithCredential(credential);
                 });
             }
         }
     });
+};
+
+export const startSignUp = (signUpData = {}) => {
+    return () => {
+        const {
+            email = '',
+            password = ''
+        } = signUpData;
+        return firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password).catch(function (error) {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            console.log(error.message);
+            // if (error.code === 'auth/email-already-in-use') {
+            //     linkAccount(error.email, error.credential);
+            // }
+        });
+    };
 };

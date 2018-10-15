@@ -10,6 +10,7 @@ import AddGamePage from 'components/game/AddGamePage';
 import EditGamePage from 'components/game/EditGamePage';
 import AddPlayerPage from '../components/player/AddPlayerPage';
 import LoginPage from 'components/LoginPage';
+import SignUpPage from 'components/SignUpPage';
 import EditPlayerPage from 'components/player/EditPlayerPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -21,6 +22,7 @@ const AppRouter = () => (
         <div>
             <Switch>
                 <PublicRoute path="/" component={LoginPage} exact={true} />
+                <PublicRoute path="/signup" component={SignUpPage} exact={true} />
                 <PrivateRoute path="/dashboard" component={GroupDashboardPage} />
                 <PrivateRoute path="/group/create" component={AddGroupPage} />
                 <PrivateRoute path="/group/edit/:id" component={EditGroupPage} />
