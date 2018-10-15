@@ -35,13 +35,7 @@ export class LoginPage extends React.Component {
                 email: this.state.email,
                 password: this.state.password,
             }).catch((err) => {
-                console.log(err.message);
-                if(err.code === 'auth/user-not-found') {
-                    this.setState(() => ({ error: 'Usuário não encontrado.' }));
-                }
-                 else if(err.code === 'auth/wrong-password') {
-                    this.setState(() => ({ error: 'Senha incorreta.' }));
-                }
+                this.setState(() => ({ error: err.message }));
             });
         }
     };

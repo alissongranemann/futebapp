@@ -33,7 +33,9 @@ export class ConfirmResetPasswordPage extends React.Component {
             this.props.startConfirmResetPassword({
                 code: this.state.code,
                 newPassword: this.state.newPassword
-            });
+            }).catch((err) => {
+                this.setState(() => ({ error: err.message }));
+            });;
         }
     };
 
