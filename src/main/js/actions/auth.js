@@ -25,6 +25,7 @@ export const startLoginGoogle = () => {
 export const startLoginFacebook = () => {
     return () => {
         var facebookProvider = new firebase.auth.FacebookAuthProvider();
+        facebookProvider.addScope('email');
         return startLogin(facebookProvider);
     };
 };
@@ -48,6 +49,7 @@ const linkAccount = (email, credential) => {
             }
             if (providers[0] == firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD) {
                 var facebookProvider = new firebase.auth.FacebookAuthProvider();
+                facebookProvider.addScope('email');
                 firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
                     return result.user.linkAndRetrieveDataWithCredential(credential);
                 });
