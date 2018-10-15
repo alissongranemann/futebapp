@@ -1,12 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startLoginGoogle, startLoginFacebook } from 'actions/auth';
+import { startLoginGoogle, startLoginFacebook, startLoginEmail } from 'actions/auth';
 import { Link } from 'react-router-dom';
 
 export class LoginPage extends React.Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            email: '',
+            password: '',
+            error: ''
+        };
+    }
+
+    onEmailChange = (e) => {
+        const email = e.target.value;
+        this.setState(() => ({ email }));
+    };
+
+    onPasswordChange = (e) => {
+        const password = e.target.value;
+        this.setState(() => ({ password }));
+    };
+
     onSubmit = (e) => {
         e.preventDefault();
+        if (!this.state.email || !this.state.password) {
+            this.setState(() => ({ error: 'Preencha os campos obrigatórios.' }));
+        } else {
+            this.setState(() => ({ error: '' }));
+            this.props.startLoginEmail({
+                email: this.state.email,
+                password: this.state.password,
+            });
+        }
     };
 
     onForgotPassword = (e) => {
@@ -36,15 +65,18 @@ export class LoginPage extends React.Component {
                             </a>
                         </div>
                         <form className="login-form" onSubmit={this.onSubmit}>
+                            {this.state.error && <p>{this.state.error}</p>}
                             <input
                                 type="text"
                                 className="text-input"
                                 placeholder="Email"
+                                onChange={this.onEmailChange}
                             />
                             <input
                                 type="password"
                                 className="text-input"
                                 placeholder="Senha"
+                                onChange={this.onPasswordChange}
                             />
                             <a onClick={this.onForgotPassword}>Esqueceu sua senha?</a>
                             <br />
@@ -63,7 +95,8 @@ export class LoginPage extends React.Component {
 
 const mapDispatchToProps = (dispatch) => ({
     startLoginGoogle: () => dispatch(startLoginGoogle()),
-    startLoginFacebook: () => dispatch(startLoginFacebook())
+    startLoginFacebook: () => dispatch(startLoginFacebook()),
+    startLoginEmail: ({ email, password }) => dispatch(startLoginEmail({ email, password })),
 });
 
 export default connect(undefined, mapDispatchToProps)(LoginPage);

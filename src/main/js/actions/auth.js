@@ -72,3 +72,15 @@ export const startSignUp = (signUpData = {}) => {
         });
     };
 };
+
+export const startLoginEmail = (signInData = {}) => {
+    return () => {
+        const {
+            email = '',
+            password = ''
+        } = signInData;
+        return firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
+            console.log(error.message);
+        });
+    };
+};
