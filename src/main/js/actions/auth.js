@@ -25,7 +25,6 @@ export const startLoginGoogle = () => {
 export const startLoginFacebook = () => {
     return () => {
         var facebookProvider = new firebase.auth.FacebookAuthProvider();
-        facebookProvider.addScope('email');
         return startLogin(facebookProvider);
     };
 };
@@ -39,7 +38,7 @@ const startLogin = (provider) => {
 };
 
 const linkAccount = (email, credential) => {
-    return firebase.auth().fetchProvidersForEmail(email).then(function (providers) {
+    return firebase.auth().fetchSignInMethodsForEmail(email).then(function (providers) {
         if (providers.length > 0) {
             if (providers[0] == firebase.auth.GoogleAuthProvider.GOOGLE_SIGN_IN_METHOD) {
                 var googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -49,7 +48,6 @@ const linkAccount = (email, credential) => {
             }
             if (providers[0] == firebase.auth.FacebookAuthProvider.FACEBOOK_SIGN_IN_METHOD) {
                 var facebookProvider = new firebase.auth.FacebookAuthProvider();
-                facebookProvider.addScope('email');
                 firebase.auth().signInWithPopup(facebookProvider).then(function (result) {
                     return result.user.linkAndRetrieveDataWithCredential(credential);
                 });
@@ -64,14 +62,7 @@ export const startSignUp = (signUpData = {}) => {
             email = '',
             password = ''
         } = signUpData;
-        return firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password).catch(function (error) {
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            console.log(error.message);
-            // if (error.code === 'auth/email-already-in-use') {
-            //     linkAccount(error.email, error.credential);
-            // }
-        });
+        return firebase.auth().createUserAndRetrieveDataWithEmailAndPassword(email, password);
     };
 };
 
@@ -91,15 +82,5 @@ export const startResetPassword = (resetData = {}) => {
             email = ''
         } = resetData;
         return firebase.auth().sendPasswordResetEmail(email);
-    };
-};
-
-export const startConfirmResetPassword = (resetData = {}) => {
-    return () => {
-        const {
-            code = '',
-            newPassword = ''
-        } = resetData;
-        return firebase.auth().confirmPasswordReset(code, newPassword);
     };
 };

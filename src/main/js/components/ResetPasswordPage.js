@@ -26,8 +26,6 @@ export class ResetPasswordPage extends React.Component {
             this.setState(() => ({ error: '' }));
             this.props.startResetPassword({
                 email: this.state.email,
-            }).then(() => {
-                this.props.history.push("/reset/confirm")
             }).catch((err) => {
                 this.setState(() => ({ error: err.message }));
             });

@@ -15,7 +15,6 @@ import EditPlayerPage from 'components/player/EditPlayerPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 import ResetPasswordPage from 'components/ResetPasswordPage';
-import ConfirmResetPasswordPage from 'components/ConfirmResetPasswordPage';
 
 export const history = createBrowserHistory();
 
@@ -26,7 +25,6 @@ const AppRouter = () => (
                 <PublicRoute path="/" component={LoginPage} exact={true} />
                 <PublicRoute path="/signup" component={SignUpPage} />
                 <PublicRoute path="/reset" component={ResetPasswordPage} exact={true} />
-                <PublicRoute path="/reset/confirm" component={ConfirmResetPasswordPage} />
                 <PrivateRoute path="/dashboard" component={GroupDashboardPage} />
                 <PrivateRoute path="/group/create" component={AddGroupPage} />
                 <PrivateRoute path="/group/edit/:id" component={EditGroupPage} />

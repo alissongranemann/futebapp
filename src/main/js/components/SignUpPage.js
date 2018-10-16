@@ -41,7 +41,9 @@ export class SignUpPage extends React.Component {
             this.props.startSignUp({
                 email: this.state.email,
                 password: this.state.password
-            });
+            }).catch((err) => {
+                this.setState(() => ({ error: err.message }));
+            });;
         }
     };
 
