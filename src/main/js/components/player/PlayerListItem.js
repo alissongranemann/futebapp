@@ -5,7 +5,12 @@ import { startRemovePlayer } from 'actions/players';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Typography from '@material-ui/core/Typography';
+import PersonIcon from '@material-ui/icons/Person';
+import Avatar from '@material-ui/core/Avatar';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export class PlayerListItem extends React.Component {
 
@@ -15,14 +20,20 @@ export class PlayerListItem extends React.Component {
     };
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <div className="list-item">
-                <div>
-                    <Typography variant="h6">
-                        {this.props.name}
-                    </Typography>
-                </div>
-                <div>
+            <ListItem >
+                <ListItemAvatar>
+                    <Avatar>
+                        <PersonIcon />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                    primary={this.props.name}
+                    secondary={this.props.position}
+                />
+                <ListItemSecondaryAction>
                     <Link to={`/player/edit/${this.props.id}`}>
                         <IconButton aria-label="Edit">
                             <EditIcon />
@@ -31,8 +42,8 @@ export class PlayerListItem extends React.Component {
                     <IconButton aria-label="Delete" onClick={this.onRemove}>
                         <DeleteIcon />
                     </IconButton>
-                </div>
-            </div>
+                </ListItemSecondaryAction>
+            </ListItem>
         );
     }
 

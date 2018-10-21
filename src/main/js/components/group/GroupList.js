@@ -6,6 +6,8 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import { positiveButtonStyles } from 'styles/button'
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
+import Paper from '@material-ui/core/Paper';
 
 export class GroupList extends React.Component {
 
@@ -16,7 +18,8 @@ export class GroupList extends React.Component {
                 <Typography variant="h5" gutterBottom>
                     SEUS GRUPOS
                 </Typography>
-                <div className="list-body">
+                <Paper>
+                <List>
                     {
                         this.props.groups.length === 0 ? (
                             <div className="list-item list-item--message">
@@ -28,7 +31,8 @@ export class GroupList extends React.Component {
                                 })
                             )
                     }
-                </div>
+                </List>
+                </Paper>
                 <div className="list-footer">
                     <Link to={'/group/create/'}>
                         <Button variant="contained" size="large" color='primary' className={classes.button}>
