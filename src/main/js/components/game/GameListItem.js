@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { startRemoveGame } from 'actions/games'
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
 
 export class GameListItem extends React.Component {
 
@@ -14,17 +18,19 @@ export class GameListItem extends React.Component {
         return (
             <div className="list-item">
                 <div>
-                    <h3 className="list-item__title">{this.props.location}</h3>
+                    <Typography variant="h6">
+                        {this.props.location}
+                    </Typography>
                 </div>
-                <div className="action-row">
+                <div>
                     <Link to={`/game/edit/${this.props.id}`}>
-                        <button className="action-button-wrapper">
-                            <img className="action-button" src="/images/icons/edit-button.svg" />
-                        </button>
+                        <IconButton aria-label="Edit">
+                            <EditIcon />
+                        </IconButton>
                     </Link>
-                    <button className="action-button-wrapper" onClick={this.onRemove}>
-                        <img className="action-button" src="/images/icons/delete-button.svg" />
-                    </button>
+                    <IconButton aria-label="Delete" onClick={this.onRemove}>
+                        <DeleteIcon />
+                    </IconButton>
                 </div>
             </div>
         );

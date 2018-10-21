@@ -3,6 +3,24 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startRemoveGroup } from 'actions/groups';
 import { withRouter } from "react-router";
+import IconButton from '@material-ui/core/IconButton';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Typography from '@material-ui/core/Typography';
+import { Paper } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+    root: {
+        ...theme.mixins.gutters(),
+        paddingTop: theme.spacing.unit,
+        paddingBottom: theme.spacing.unit,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+});
+
 
 export class GroupListItem extends React.Component {
 
@@ -17,19 +35,23 @@ export class GroupListItem extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
+
         return (
-            <Link className="list-item" to={`/group/${this.props.id}`}>
-                <div>
-                    <h3 className="list-item__title">{this.props.name}</h3>
-                </div>
-                <div className="action-row">
-                    <button className="action-button-wrapper" onClick={this.onEdit}>
-                        <img className="action-button" src="/images/icons/edit-button.svg" />
-                    </button>
-                    <button className="action-button-wrapper" onClick={this.onRemove}>
-                        <img className="action-button" src="/images/icons/delete-button.svg" />
-                    </button>
-                </div>
+            <Link to={`/group/${this.props.id}`}>
+                <Paper className={classes.root}>
+                    <Typography variant="h6" align='center'>
+                        {this.props.name}
+                    </Typography>
+                    <div>
+                        <IconButton aria-label="Edit" onClick={this.onEdit}>
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton aria-label="Delete" onClick={this.onRemove}>
+                            <DeleteIcon />
+                        </IconButton>
+                    </div>
+                </Paper>
             </Link>
         );
     }
@@ -40,4 +62,6 @@ const mapDispatchToProps = (dispatch) => ({
     startRemoveGroup: (data) => dispatch(startRemoveGroup(data))
 });
 
-export default withRouter(connect(undefined, mapDispatchToProps)(GroupListItem));
+const connectedComponent = connect(undefined, mapDispatchToProps)(GroupListItem);
+const styledComponent = withStyles(styles)(connectedComponent);
+export default withRouter(styledComponent);

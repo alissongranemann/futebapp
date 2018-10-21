@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PlayerForm from './PlayerForm';
 import { startAddPlayer } from 'actions/players';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
 
 export class AddPlayerPage extends React.Component {
 
@@ -16,10 +19,12 @@ export class AddPlayerPage extends React.Component {
                 <h1></h1>
                 <div className="page-header">
                     <div className="content-container page-header__action">
-                        <h1 className="page-header__title">Criar jogador</h1>
-                        <button className="header-action-button-wrapper" onClick={this.props.history.goBack}>
-                            <img className="header-action-button" src="/images/icons/cancel-button.svg" />
-                        </button>
+                        <Typography variant="h4">
+                            CRIAR JOGADOR
+                        </Typography>
+                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
+                            <CloseIcon fontSize="large" />
+                        </IconButton>
                     </div>
                 </div>
                 <div className="content-container">

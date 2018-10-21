@@ -8,13 +8,30 @@ import { login, logout } from './actions/auth'
 import { firebase } from 'service/firebase';
 import LoadingPage from './components/LoadingPage';
 import 'styles.scss';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 
 const store = configureStore();
 
+const theme = createMuiTheme({
+    typography: {
+        htmlFontSize: 10,
+        useNextVariants: true,
+        h5: {
+            fontWeight: 700
+        }
+    },
+    palette: {
+        primary: green
+    }
+});
+
 const jsx = (
-    <Provider store={store}>
-        <AppRouter />
-    </Provider>
+    <MuiThemeProvider theme={theme}>
+        <Provider store={store}>
+            <AppRouter />
+        </Provider>
+    </MuiThemeProvider>
 );
 let hasRendered = false;
 const renderApp = () => {

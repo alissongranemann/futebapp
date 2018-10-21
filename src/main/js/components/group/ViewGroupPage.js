@@ -2,16 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GameList from 'components/game/GameList'
 import PlayerList from 'components/player/PlayerList';
+import IconButton from '@material-ui/core/IconButton';
+import ArrowBack from '@material-ui/icons/ArrowBack';
+import Typography from '@material-ui/core/Typography';
 
 const ViewGroupPage = (props) => {
     return (
         <div>
             <div className="page-header">
                 <div className="content-container page-header__action">
-                    <h1 className="page-header__title">{props.group.name}</h1>
-                    <button className="header-action-button-wrapper" onClick={props.history.goBack}>
-                        <img className="header-action-button" src="/images/icons/back.svg" />
-                    </button>
+                    <Typography variant="h4" align="left">
+                        {props.group.name.toUpperCase()}
+                    </Typography>
+                    <IconButton aria-label="Go back" onClick={props.history.goBack}>
+                        <ArrowBack fontSize="large" />
+                    </IconButton>
                 </div>
             </div>
             <GameList groupId={props.group.id} />

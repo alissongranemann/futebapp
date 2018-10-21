@@ -10,13 +10,14 @@ html {
 
 body {
   color: $dark-grey;
-  font-family: Ubuntu, Helvetica, Arial;
+  font-family: Roboto, Helvetica, Arial;
   font-size: $m-size;
   line-height: 1.6;
 }
 
 a, button {
   cursor: pointer;
+  text-decoration: none;
 }
 
 button:disabled {

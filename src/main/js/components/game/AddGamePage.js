@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GameForm from './GameForm';
 import { startAddGame } from 'actions/games';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
 
 export class AddGamePage extends React.Component {
 
@@ -14,11 +17,13 @@ export class AddGamePage extends React.Component {
         return (
             <div>
                 <div className="page-header">
-                <div className="content-container page-header__action">
-                        <h1 className="page-header__title">Criar pelada</h1>
-                        <button className="header-action-button-wrapper" onClick={this.props.history.goBack}>
-                            <img className="header-action-button" src="/images/icons/cancel-button.svg" />
-                        </button>
+                    <div className="content-container page-header__action">
+                        <Typography variant="h4">
+                            CRIAR PELADA
+                        </Typography>
+                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
+                            <CloseIcon fontSize="large" />
+                        </IconButton>
                     </div>
                 </div>
                 <div className="content-container">

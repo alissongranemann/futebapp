@@ -1,14 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import DatePicker from 'react-datepicker';
-import TimePicker from 'react-times';
+import { InlineDatePicker } from 'material-ui-pickers/DatePicker';
+import { InlineTimePicker } from 'material-ui-pickers/TimePicker';
+import MomentUtils from 'material-ui-pickers/utils/moment-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
 import TeamComponent from '../team/TeamComponent';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { positiveButtonStyles } from 'styles/button';
 
-import 'react-datepicker/dist/react-datepicker.css';
-import 'react-times/css/material/default.css';
+moment.locale('pt-br');
 
 export class GameForm extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -30,20 +36,25 @@ export class GameForm extends React.Component {
             error: ''
         };
     }
-    onLocationChange = (e) => {
-        const location = e.target.value;
-        this.setState(() => ({ location }));
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
     };
-    onDateChange = (date) => {
-        if (date) {
-            this.setState(() => ({ date }));
+
+    onDateChange = (selectedDate) => {
+        if (selectedDate) {
+            this.setState(() => ({ date: selectedDate.toDate() }));
         }
     };
-    onTimeChange = (options) => {
-        if (options) {
-            this.setState(() => ({ time: moment(options.hour + ":" + options.minute, "HH:mm") }));
+
+    onTimeChange = (selectedTime) => {
+        if (selectedTime) {
+            this.setState(() => ({ time: selectedTime.toDate() }));
         }
     };
+
     onPlayerChange = (value, teamIndex) => {
         var team = this.state.teams[teamIndex];
         var selectedPlayer = { name: value };
@@ -51,6 +62,7 @@ export class GameForm extends React.Component {
         var availablePlayers = this.state.availablePlayers.filter(player => value !== player.name);
         this.setState(() => ({ availablePlayers }));
     };
+
     onSubmit = (e) => {
         e.preventDefault();
         if (!this.state.location || !this.state.date || !this.state.time) {
@@ -66,29 +78,52 @@ export class GameForm extends React.Component {
             });
         }
     };
+
     render() {
+        const { classes } = this.props;
+
         return (
             <form className="form" onSubmit={this.onSubmit}>
                 {this.state.error && <p>{this.state.error}</p>}
-                <input
-                    type="text"
-                    className="text-input"
-                    placeholder="Localização"
+                <TextField
+                    label="Localização *"
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange('location')}
                     value={this.state.location}
-                    onChange={this.onLocationChange}
+                    InputLabelProps={{
+                        classes: {
+                            root: classes.resize,
+                        }
+                    }}
+                    InputProps={{
+                        classes: {
+                            input: classes.resize,
+                        }
+                    }}
                 />
-                <div className="input-row">
-                    <DatePicker
-                        selected={this.state.date}
-                        onChange={this.onDateChange}
-                        minDate={moment()}
-                        className="text-input__date"
-                    />
-                    <TimePicker
-                        time={this.state.time.format('HH:mm')}
-                        onTimeChange={this.onTimeChange}
-                    />
-                </div>
+                    <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                        <div className="input-row">
+                            <InlineDatePicker
+                                label="Dia *"
+                                // autoOk
+                                value={this.state.date}
+                                onChange={this.onDateChange}
+                                disablePast
+                                variant="outlined"
+                                locale={'pt-br'}
+                                format="DD/MM/YY"
+                            />
+                            <InlineTimePicker
+                                label="Hora *"
+                                ampm={false}
+                                clearable
+                                value={this.state.time}
+                                onChange={this.onTimeChange}
+                                variant="outlined"
+                            />
+                        </div>
+                    </MuiPickersUtilsProvider>
                 {this.state.teams.map((team, index) => (
                     <TeamComponent
                         key={index}
@@ -100,7 +135,9 @@ export class GameForm extends React.Component {
                     />
                 ))}
                 <div className="form-footer">
-                    <button className="button">Salvar</button>
+                    <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
+                        Salvar
+                    </Button>
                 </div>
             </form>
         )
@@ -111,4 +148,6 @@ const mapStateToProps = (state) => ({
     players: state.players
 });
 
-export default connect(mapStateToProps)(GameForm)
+
+const connectedComponent = connect(mapStateToProps)(GameForm)
+export default withStyles(positiveButtonStyles)(connectedComponent);

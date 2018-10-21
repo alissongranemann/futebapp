@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GroupForm from './GroupForm';
 import { startEditGroup } from 'actions/groups';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
 
 export class EditGroupPage extends React.Component {
 
@@ -14,11 +17,13 @@ export class EditGroupPage extends React.Component {
         return (
             <div>
                 <div className="page-header">
-                <div className="content-container page-header__action">
-                        <h1 className="page-header__title">Editar grupo</h1>
-                        <button className="header-action-button-wrapper" onClick={this.props.history.goBack}>
-                            <img className="header-action-button" src="/images/icons/cancel-button.svg" />
-                        </button>
+                    <div className="content-container page-header__action">
+                        <Typography variant="h4">
+                            EDITAR GRUPO
+                        </Typography>
+                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
+                            <CloseIcon fontSize="large" />
+                        </IconButton>
                     </div>
                 </div>
                 <div className="content-container">

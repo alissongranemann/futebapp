@@ -1,6 +1,11 @@
 import React from 'react';
+import { withStyles } from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { positiveButtonStyles } from 'styles/button';
 
-export default class PlayerForm extends React.Component {
+export class PlayerForm extends React.Component {
+
     constructor(props) {
         super(props);
 
@@ -9,10 +14,13 @@ export default class PlayerForm extends React.Component {
             error: ''
         };
     }
-    onNameChange = (e) => {
-        const name = e.target.value;
-        this.setState(() => ({ name }));
+
+    handleChange = name => event => {
+        this.setState({
+            [name]: event.target.value,
+        });
     };
+
     onSubmit = (e) => {
         e.preventDefault();
 
@@ -25,21 +33,39 @@ export default class PlayerForm extends React.Component {
             });
         }
     };
+
     render() {
+        const { classes } = this.props;
+
         return (
             <form className="form" onSubmit={this.onSubmit}>
                 {this.state.error && <p>{this.state.error}</p>}
-                <input
-                    type="text"
-                    className="text-input"
-                    placeholder="Nome"
+                <TextField
+                    label="Nome *"
+                    margin="normal"
+                    variant="outlined"
+                    onChange={this.handleChange('name')}
                     value={this.state.name}
-                    onChange={this.onNameChange}
+                    InputLabelProps={{
+                        classes: {
+                            root: classes.resize,
+                        }
+                    }}
+                    InputProps={{
+                        classes: {
+                            input: classes.resize,
+                        }
+                    }}
                 />
                 <div className="form-footer">
-                    <button className="button">Salvar</button>
+                    <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
+                        Salvar
+                    </Button>
                 </div>
+                
             </form>
         )
     }
 }
+
+export default withStyles(positiveButtonStyles)(PlayerForm);

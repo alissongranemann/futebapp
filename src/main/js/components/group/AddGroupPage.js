@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import GroupForm from './GroupForm';
 import { startAddGroup } from 'actions/groups';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import Typography from '@material-ui/core/Typography';
 
 export class AddGroupPage extends React.Component {
 
@@ -15,10 +18,12 @@ export class AddGroupPage extends React.Component {
             <div>
                 <div className="page-header">
                 <div className="content-container page-header__action">
-                        <h1 className="page-header__title">Criar grupo</h1>
-                        <button className="header-action-button-wrapper" onClick={this.props.history.goBack}>
-                            <img className="header-action-button" src="/images/icons/cancel-button.svg" />
-                        </button>
+                        <Typography variant="h4">
+                            CRIAR GRUPO
+                        </Typography>
+                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
+                            <CloseIcon fontSize="large" />
+                        </IconButton>
                     </div>
                 </div>
                 <div className="content-container">
