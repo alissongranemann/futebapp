@@ -9,12 +9,12 @@ import NotFoundPage from 'components/NotFoundPage';
 import AddGamePage from 'components/game/AddGamePage';
 import EditGamePage from 'components/game/EditGamePage';
 import AddPlayerPage from 'components/player/AddPlayerPage';
-import LoginPage from 'components/LoginPage';
-import SignUpPage from 'components/SignUpPage';
+import LoginPage from 'components/login/LoginPage';
+import SignUpPage from 'components/login/SignUpPage';
+import ResetPasswordPage from 'components/login/ResetPasswordPage';
 import EditPlayerPage from 'components/player/EditPlayerPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
-import ResetPasswordPage from 'components/ResetPasswordPage';
 
 export const history = createBrowserHistory();
 

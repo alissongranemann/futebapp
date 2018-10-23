@@ -8,6 +8,13 @@ import { positiveButtonStyles } from 'styles/button'
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
+import combineStyles from 'styles/utils/combineStyles';
+
+const styles = {
+    list: {
+        padding: 0
+    }
+}
 
 const GameList = (props) => {
     const { classes } = props;
@@ -18,18 +25,19 @@ const GameList = (props) => {
                 PELADAS
             </Typography>
             <Paper>
-                <List>
+                <List className={classes.list}>
                     {
                         props.games.length === 0 ? (
-                            <div className="list-item list-item--message">
-                                <span>Sem peladas</span>
-                            </div>
+                            <Typography variant="subtitle1" align="center" >
+                                Sem peladas
+                            </Typography>
                         ) : (
-                                props.games.map((game) => {
+                                props.games.map((game, index, arr) => {
                                     return <GameListItem
                                         key={game.id}
                                         groupId={props.groupId}
                                         {...game}
+                                        divider={index !== arr.length-1}
                                     />;
                                 })
                             )
@@ -54,4 +62,4 @@ const mapStateToProps = (state) => {
 };
 
 const connectedComponent = connect(mapStateToProps)(GameList);
-export default withStyles(positiveButtonStyles)(connectedComponent);
+export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

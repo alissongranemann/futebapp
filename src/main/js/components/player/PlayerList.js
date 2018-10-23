@@ -8,6 +8,13 @@ import { positiveButtonStyles } from 'styles/button'
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
+import combineStyles from 'styles/utils/combineStyles';
+
+const styles = {
+    list: {
+        padding: 0
+    }
+}
 
 const PlayerList = (props) => {
     const { classes } = props;
@@ -17,18 +24,19 @@ const PlayerList = (props) => {
                 JOGADORES
             </Typography>
             <Paper>
-                <List>
+                <List className={classes.list}>
                     {
                         props.players.length === 0 ? (
-                            <Typography variant="caption" align="center" >
+                            <Typography variant="subtitle1" align="center" >
                                 Sem jogadores
                             </Typography>
                         ) : (
-                                props.players.map((player) => {
+                                props.players.map((player, index, arr) => {
                                     return <PlayerListItem
                                         key={player.id}
                                         groupId={props.groupId}
                                         {...player}
+                                        divider={index !== arr.length-1}
                                     />;
                                 })
                             )
@@ -53,4 +61,4 @@ const mapStateToProps = (state) => {
 };
 
 const connectedComponent = connect(mapStateToProps)(PlayerList);
-export default withStyles(positiveButtonStyles)(connectedComponent);
+export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

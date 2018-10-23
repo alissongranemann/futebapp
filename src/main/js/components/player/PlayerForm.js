@@ -29,9 +29,9 @@ export class PlayerForm extends React.Component {
 
     componentDidMount() {
         this.setState({
-          labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+            labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
         });
-      }
+    }
 
     handleChange = event => {
         this.setState({

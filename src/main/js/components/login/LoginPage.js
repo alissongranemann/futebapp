@@ -2,6 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { startLoginGoogle, startLoginFacebook, startLoginEmail } from 'actions/auth';
 import { Link } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { positiveButtonStyles } from 'styles/button';
 
 export class LoginPage extends React.Component {
 
@@ -15,14 +19,10 @@ export class LoginPage extends React.Component {
         };
     }
 
-    onEmailChange = (e) => {
-        const email = e.target.value;
-        this.setState(() => ({ email }));
-    };
-
-    onPasswordChange = (e) => {
-        const password = e.target.value;
-        this.setState(() => ({ password }));
+    handleChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value,
+        });
     };
 
     onSubmit = (e) => {
@@ -40,11 +40,9 @@ export class LoginPage extends React.Component {
         }
     };
 
-    onForgotPassword = (e) => {
-        e.preventDefault();
-    }
-
     render() {
+        const { classes } = this.props;
+
         return (
             <div className="box-layout">
                 <div className="box-layout__wrap_box">
@@ -68,21 +66,28 @@ export class LoginPage extends React.Component {
                         </div>
                         <form className="login-form" onSubmit={this.onSubmit}>
                             {this.state.error && <p>{this.state.error}</p>}
-                            <input
-                                type="text"
-                                className="text-input"
-                                placeholder="Email"
-                                onChange={this.onEmailChange}
+                            <TextField
+                                label="Email *"
+                                margin="normal"
+                                variant="outlined"
+                                name='email'
+                                onChange={this.handleChange}
+                                value={this.state.email}
                             />
-                            <input
+                            <TextField
+                                label="Senha *"
+                                margin="normal"
+                                variant="outlined"
+                                name='password'
                                 type="password"
-                                className="text-input"
-                                placeholder="Senha"
-                                onChange={this.onPasswordChange}
+                                onChange={this.handleChange}
+                                value={this.state.password}
                             />
                             <Link to="/reset">Esqueceu sua senha?</Link>
                             <br />
-                            <button className="button">Entrar</button>
+                            <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
+                                Entrar
+                            </Button>
                             <div className="login-footer">
                                 <p>Não tem conta?</p>
                                 <Link to="/signup">Registrar-se</Link>
@@ -101,4 +106,5 @@ const mapDispatchToProps = (dispatch) => ({
     startLoginEmail: ({ email, password }) => dispatch(startLoginEmail({ email, password })),
 });
 
-export default connect(undefined, mapDispatchToProps)(LoginPage);
+const connectedComponent = connect(undefined, mapDispatchToProps)(LoginPage);
+export default withStyles(positiveButtonStyles)(connectedComponent);

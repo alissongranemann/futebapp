@@ -8,26 +8,38 @@ import { positiveButtonStyles } from 'styles/button'
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
+import combineStyles from 'styles/utils/combineStyles';
+
+const styles = {
+    list: {
+        padding: 0
+    }
+}
 
 export class GroupList extends React.Component {
 
     render() {
         const { classes } = this.props;
+
         return (
             <div className="content-container">
                 <Typography variant="h5" gutterBottom>
                     SEUS GRUPOS
                 </Typography>
                 <Paper>
-                <List>
+                <List className={classes.list}>
                     {
                         this.props.groups.length === 0 ? (
-                            <div className="list-item list-item--message">
-                                <span>Sem grupos</span>
-                            </div>
+                            <Typography variant="subtitle1" align="center" >
+                                Sem jogadores
+                            </Typography>
                         ) : (
-                                this.props.groups.map((group) => {
-                                    return <GroupListItem key={group.id} {...group} />;
+                                this.props.groups.map((group, index, arr) => {
+                                    return <GroupListItem 
+                                                key={group.id} 
+                                                {...group}
+                                                divider={index !== arr.length-1}
+                                            />;
                                 })
                             )
                     }
@@ -52,4 +64,4 @@ const mapStateToProps = (state) => {
 };
 
 const connectedComponent = connect(mapStateToProps)(GroupList);
-export default withStyles(positiveButtonStyles)(connectedComponent);
+export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

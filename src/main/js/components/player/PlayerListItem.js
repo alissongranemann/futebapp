@@ -20,10 +20,8 @@ export class PlayerListItem extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <ListItem >
+            <ListItem divider={this.props.divider}>
                 <ListItemAvatar>
                     <Avatar>
                         <PersonIcon />

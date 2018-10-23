@@ -9,7 +9,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import moment from 'moment';
-import { Card } from '@material-ui/core';
 
 export class GameListItem extends React.Component {
 
@@ -20,7 +19,7 @@ export class GameListItem extends React.Component {
 
     render() {
         return (
-            <ListItem>
+            <ListItem divider={this.props.divider}>
                 <ListItemText
                     primary={this.props.location}
                     secondary={
