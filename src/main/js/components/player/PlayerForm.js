@@ -9,6 +9,14 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import ReactDOM from 'react-dom';
+import Grid from '@material-ui/core/Grid';
+import combineStyles from 'styles/utils/combineStyles';
+
+const styles = {
+    buttonItem: {
+        alignSelf: "flex-end"
+    }
+}
 
 const positions = [
     'GOLEIRO', 'ZAGUEIRO', 'LATERAL', 'MEIA', 'ATACANTE'
@@ -57,57 +65,66 @@ export class PlayerForm extends React.Component {
         const { classes } = this.props;
 
         return (
-            <form className="form" onSubmit={this.onSubmit}>
+            <Grid container spacing={16} direction='column'>
                 {this.state.error && <p>{this.state.error}</p>}
-                <TextField
-                    label="Nome *"
-                    margin="normal"
-                    variant="outlined"
-                    name='name'
-                    onChange={this.handleChange}
-                    value={this.state.name}
-                />
-                <FormControl variant="outlined">
-                    <InputLabel
-                        ref={ref => {
-                            this.InputLabelRef = ref;
-                        }}
-                        htmlFor="outlined-age-simple"
-                    >
-                        Posição
-                    </InputLabel>
-                    <Select
-                        value={this.state.position}
-                        name='position'
+                <Grid item xs={12}>
+                    <TextField
+                        label="Nome *"
+                        variant="outlined"
+                        name='name'
                         onChange={this.handleChange}
-                        displayEmpty
-                        input={
-                            <OutlinedInput
-                                labelWidth={this.state.labelWidth}
-                            />
-                        }
+                        value={this.state.name}
+                        fullWidth
+                    />
+                </Grid>
+                <Grid item xs={12}>
+                    <FormControl variant="outlined" fullWidth>
+                        <InputLabel
+                            ref={ref => {
+                                this.InputLabelRef = ref;
+                            }}
+                            htmlFor="outlined-age-simple"
+                        >
+                            Posição
+                                </InputLabel>
+                        <Select
+                            value={this.state.position}
+                            name='position'
+                            onChange={this.handleChange}
+                            displayEmpty
+                            input={
+                                <OutlinedInput
+                                    labelWidth={this.state.labelWidth}
+                                />
+                            }
+                        >
+                            {
+                                positions.map((position, index) => {
+                                    return <MenuItem
+                                        key={index}
+                                        value={position}
+                                    >
+                                        {position}
+                                    </MenuItem>
+                                })
+                            }
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={3} className={classes.buttonItem}>
+                    <Button
+                        variant="contained"
+                        size="large"
+                        color='primary'
+                        className={classes.button}
+                        onClick={this.onSubmit}
                     >
-                        {
-                            positions.map((position, index) => {
-                                return <MenuItem
-                                    key={index}
-                                    value={position}
-                                >
-                                    {position}
-                                </MenuItem>
-                            })
-                        }
-                    </Select>
-                </FormControl>
-                <div className="form-footer">
-                    <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
                         Salvar
-                    </Button>
-                </div>
-
-            </form>
+                </Button>
+                </Grid>
+            </Grid>
         )
     }
 }
 
-export default withStyles(positiveButtonStyles)(PlayerForm);
+export default withStyles(combineStyles(styles, positiveButtonStyles))(PlayerForm);
