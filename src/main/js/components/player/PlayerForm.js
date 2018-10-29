@@ -120,7 +120,7 @@ export class PlayerForm extends React.Component {
                         onClick={this.onSubmit}
                     >
                         Salvar
-                </Button>
+                    </Button>
                 </Grid>
             </Grid>
         )

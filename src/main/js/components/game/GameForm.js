@@ -4,14 +4,22 @@ import moment from 'moment';
 import { InlineDatePicker } from 'material-ui-pickers/DatePicker';
 import { InlineTimePicker } from 'material-ui-pickers/TimePicker';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
-import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider';
 import TeamComponent from '../team/TeamComponent';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
+import Grid from '@material-ui/core/Grid';
+import combineStyles from 'styles/utils/combineStyles';
 
 moment.locale('pt-br');
+
+const styles = {
+    buttonItem: {
+        alignSelf: "flex-end"
+    }
+}
 
 export class GameForm extends React.Component {
 
@@ -83,63 +91,80 @@ export class GameForm extends React.Component {
         const { classes } = this.props;
 
         return (
-            <form className="form" onSubmit={this.onSubmit}>
+            <Grid container spacing={16}>
                 {this.state.error && <p>{this.state.error}</p>}
-                <TextField
-                    label="Localização *"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('location')}
-                    value={this.state.location}
-                    InputLabelProps={{
-                        classes: {
-                            root: classes.resize,
-                        }
-                    }}
-                    InputProps={{
-                        classes: {
-                            input: classes.resize,
-                        }
-                    }}
-                />
-                    <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
-                        <div className="input-row">
-                            <InlineDatePicker
-                                label="Dia *"
-                                // autoOk
-                                value={this.state.date}
-                                onChange={this.onDateChange}
-                                disablePast
-                                variant="outlined"
-                                locale={'pt-br'}
-                                format="DD/MM/YY"
-                            />
-                            <InlineTimePicker
-                                label="Hora *"
-                                ampm={false}
-                                clearable
-                                value={this.state.time}
-                                onChange={this.onTimeChange}
-                                variant="outlined"
-                            />
-                        </div>
-                    </MuiPickersUtilsProvider>
-                {this.state.teams.map((team, index) => (
-                    <TeamComponent
-                        key={index}
-                        teamIndex={index}
-                        name={team.name}
-                        availablePlayers={this.state.availablePlayers}
-                        teamPlayers={team.players}
-                        onPlayerChange={this.onPlayerChange}
+                <Grid item xs={12}>
+                    <TextField
+                        label="Localização *"
+                        margin="normal"
+                        variant="outlined"
+                        onChange={this.handleChange('location')}
+                        value={this.state.location}
+                        InputLabelProps={{
+                            classes: {
+                                root: classes.resize,
+                            }
+                        }}
+                        InputProps={{
+                            classes: {
+                                input: classes.resize,
+                            }
+                        }}
+                        fullWidth
                     />
-                ))}
-                <div className="form-footer">
-                    <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
+                </Grid>
+                <Grid item xs={6}>
+                    <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                        <InlineDatePicker
+                            label="Dia *"
+                            // autoOk
+                            value={this.state.date}
+                            onChange={this.onDateChange}
+                            disablePast
+                            variant="outlined"
+                            locale={'pt-br'}
+                            format="DD/MM/YY"
+                            fullWidth
+                        />
+                    </MuiPickersUtilsProvider>
+                </Grid>
+                <Grid item xs={6}>
+                    <MuiPickersUtilsProvider utils={MomentUtils} moment={moment}>
+                        <InlineTimePicker
+                            label="Hora *"
+                            ampm={false}
+                            clearable
+                            value={this.state.time}
+                            onChange={this.onTimeChange}
+                            variant="outlined"
+                            fullWidth
+                        />
+                    </MuiPickersUtilsProvider>
+                </Grid>
+                <Grid item xs={12}>
+                    {this.state.teams.map((team, index) => (
+                        <TeamComponent
+                            key={index}
+                            teamIndex={index}
+                            name={team.name}
+                            availablePlayers={this.state.availablePlayers}
+                            teamPlayers={team.players}
+                            onPlayerChange={this.onPlayerChange}
+                        />
+                    ))}
+                </Grid>
+                <Grid item xs={3} className={classes.buttonItem}>
+                    <Button
+                        variant="contained"
+                        size="large"
+                        color='primary'
+                        className={classes.button}
+                        onClick={this.onSubmit}
+                    >
                         Salvar
                     </Button>
-                </div>
-            </form>
+                </Grid>
+            </Grid>
         )
     }
 }
@@ -150,4 +175,4 @@ const mapStateToProps = (state) => ({
 
 
 const connectedComponent = connect(mapStateToProps)(GameForm)
-export default withStyles(positiveButtonStyles)(connectedComponent);
+export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);
