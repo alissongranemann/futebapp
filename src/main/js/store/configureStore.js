@@ -7,6 +7,7 @@ import gamesReducer from 'reducers/games';
 import playersReducer from 'reducers/players';
 import authReducer from 'reducers/auth';
 
+// eslint-disable-next-line
 const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export default () => {
@@ -18,6 +19,7 @@ export default () => {
     });
     const rootReducer = (state, action) => {
         if (action.type === 'LOGOUT') {
+            // eslint-disable-next-line
             state = undefined;
         }
         return appReducer(state, action);

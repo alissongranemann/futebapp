@@ -3,3 +3,5 @@ export const positiveButtonStyles = {
         color: 'white',
     },
 };
+
+export default positiveButtonStyles;
