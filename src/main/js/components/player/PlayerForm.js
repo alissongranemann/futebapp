@@ -14,16 +14,15 @@ import combineStyles from 'styles/utils/combineStyles';
 
 const styles = {
     buttonItem: {
-        alignSelf: "flex-end"
-    }
-}
+        alignSelf: 'flex-end',
+    },
+};
 
 const positions = [
-    'GOLEIRO', 'ZAGUEIRO', 'LATERAL', 'MEIA', 'ATACANTE'
+    'GOLEIRO', 'ZAGUEIRO', 'LATERAL', 'MEIA', 'ATACANTE',
 ];
 
 export class PlayerForm extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -31,7 +30,7 @@ export class PlayerForm extends React.Component {
             name: props.player ? props.player.name : '',
             position: props.player ? props.player.position : '',
             labelWidth: 0,
-            error: ''
+            error: '',
         };
     }
 
@@ -41,7 +40,7 @@ export class PlayerForm extends React.Component {
         });
     }
 
-    handleChange = event => {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -56,7 +55,7 @@ export class PlayerForm extends React.Component {
             this.setState(() => ({ error: '' }));
             this.props.onSubmit({
                 name: this.state.name,
-                position: this.state.position
+                position: this.state.position,
             });
         }
     };
@@ -80,13 +79,13 @@ export class PlayerForm extends React.Component {
                 <Grid item xs={12}>
                     <FormControl variant="outlined" fullWidth>
                         <InputLabel
-                            ref={ref => {
+                            ref={(ref) => {
                                 this.InputLabelRef = ref;
                             }}
                             htmlFor="outlined-age-simple"
                         >
                             Posição
-                                </InputLabel>
+                        </InputLabel>
                         <Select
                             value={this.state.position}
                             name='position'
@@ -99,14 +98,12 @@ export class PlayerForm extends React.Component {
                             }
                         >
                             {
-                                positions.map((position, index) => {
-                                    return <MenuItem
-                                        key={index}
-                                        value={position}
-                                    >
-                                        {position}
-                                    </MenuItem>
-                                })
+                                positions.map((position, index) => <MenuItem
+                                    key={index}
+                                    value={position}
+                                >
+                                    {position}
+                                </MenuItem>)
                             }
                         </Select>
                     </FormControl>
@@ -123,7 +120,7 @@ export class PlayerForm extends React.Component {
                     </Button>
                 </Grid>
             </Grid>
-        )
+        );
     }
 }
 

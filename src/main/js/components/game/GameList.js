@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import GameListItem from './GameListItem';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { positiveButtonStyles } from 'styles/button'
+import { positiveButtonStyles } from 'styles/button';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import combineStyles from 'styles/utils/combineStyles';
+import GameListItem from './GameListItem';
 
 const styles = {
     list: {
-        padding: 0
-    }
-}
+        padding: 0,
+    },
+};
 
 const GameList = (props) => {
     const { classes } = props;
@@ -32,15 +32,13 @@ const GameList = (props) => {
                                 Sem peladas
                             </Typography>
                         ) : (
-                                props.games.map((game, index, arr) => {
-                                    return <GameListItem
-                                        key={game.id}
-                                        groupId={props.groupId}
-                                        {...game}
-                                        divider={index !== arr.length-1}
-                                    />;
-                                })
-                            )
+                            props.games.map((game, index, arr) => <GameListItem
+                                key={game.id}
+                                groupId={props.groupId}
+                                {...game}
+                                divider={index !== arr.length - 1}
+                            />)
+                        )
                     }
                 </List>
             </Paper>
@@ -55,11 +53,9 @@ const GameList = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        games: state.games
-    };
-};
+const mapStateToProps = state => ({
+    games: state.games,
+});
 
 const connectedComponent = connect(mapStateToProps)(GameList);
 export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

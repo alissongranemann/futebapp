@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import GameForm from './GameForm';
 import { startEditGame } from 'actions/games';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import GameForm from './GameForm';
 
 export class EditGamePage extends React.Component {
-
     onSubmit = (game) => {
         this.props.startEditGame(this.props.game.id, game);
         this.props.history.goBack();
@@ -17,7 +16,7 @@ export class EditGamePage extends React.Component {
         return (
             <div>
                 <div className="page-header">
-                <div className="content-container page-header__action">
+                    <div className="content-container page-header__action">
                         <Typography variant="h4">
                             EDITAR PELADA
                         </Typography>
@@ -35,16 +34,13 @@ export class EditGamePage extends React.Component {
             </div>
         );
     }
+}
 
-};
+const mapStateToProps = (state, props) => ({
+    game: state.games.find(game => game.id === props.match.params.id),
+});
 
-const mapStateToProps = (state, props) => {
-    return {
-        game: state.games.find((game) => game.id === props.match.params.id)
-    };
-};
-
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     startEditGame: (id, game) => dispatch(startEditGame(id, game)),
 });
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PlayerForm from './PlayerForm';
 import { startAddPlayer } from 'actions/players';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
+import PlayerForm from './PlayerForm';
 
 export class AddPlayerPage extends React.Component {
-
     onSubmit = (player) => {
         this.props.startAddPlayer(this.props.match.params.groupId, player);
         this.props.history.goBack();
@@ -35,11 +34,10 @@ export class AddPlayerPage extends React.Component {
             </div>
         );
     }
-
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    startAddPlayer: (groupId, player) => dispatch(startAddPlayer(groupId, player))
+const mapDispatchToProps = dispatch => ({
+    startAddPlayer: (groupId, player) => dispatch(startAddPlayer(groupId, player)),
 });
 
 export default connect(undefined, mapDispatchToProps)(AddPlayerPage);

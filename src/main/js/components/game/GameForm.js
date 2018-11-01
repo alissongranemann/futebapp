@@ -5,24 +5,23 @@ import { InlineDatePicker } from 'material-ui-pickers/DatePicker';
 import { InlineTimePicker } from 'material-ui-pickers/TimePicker';
 import MomentUtils from 'material-ui-pickers/utils/moment-utils';
 import MuiPickersUtilsProvider from 'material-ui-pickers/MuiPickersUtilsProvider';
-import TeamComponent from '../team/TeamComponent';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
 import Grid from '@material-ui/core/Grid';
 import combineStyles from 'styles/utils/combineStyles';
+import TeamComponent from '../team/TeamComponent';
 
 moment.locale('pt-br');
 
 const styles = {
     buttonItem: {
-        alignSelf: "flex-end"
-    }
-}
+        alignSelf: 'flex-end',
+    },
+};
 
 export class GameForm extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -33,19 +32,19 @@ export class GameForm extends React.Component {
             availablePlayers: props.game ? props.game.availablePlayers : props.players,
             teams: props.game ? props.game.teams : [
                 {
-                    name: "Time A",
-                    players: []
+                    name: 'Time A',
+                    players: [],
                 },
                 {
-                    name: "Time B",
-                    players: []
-                }
+                    name: 'Time B',
+                    players: [],
+                },
             ],
-            error: ''
+            error: '',
         };
     }
 
-    handleChange = name => event => {
+    handleChange = name => (event) => {
         this.setState({
             [name]: event.target.value,
         });
@@ -64,10 +63,10 @@ export class GameForm extends React.Component {
     };
 
     onPlayerChange = (value, teamIndex) => {
-        var team = this.state.teams[teamIndex];
-        var selectedPlayer = { name: value };
+        const team = this.state.teams[teamIndex];
+        const selectedPlayer = { name: value };
         team.players = [...team.players, selectedPlayer];
-        var availablePlayers = this.state.availablePlayers.filter(player => value !== player.name);
+        const availablePlayers = this.state.availablePlayers.filter(player => value !== player.name);
         this.setState(() => ({ availablePlayers }));
     };
 
@@ -82,7 +81,7 @@ export class GameForm extends React.Component {
                 date: this.state.date.valueOf(),
                 time: this.state.time.valueOf(),
                 teams: this.state.teams,
-                availablePlayers: this.state.availablePlayers
+                availablePlayers: this.state.availablePlayers,
             });
         }
     };
@@ -103,12 +102,12 @@ export class GameForm extends React.Component {
                         InputLabelProps={{
                             classes: {
                                 root: classes.resize,
-                            }
+                            },
                         }}
                         InputProps={{
                             classes: {
                                 input: classes.resize,
-                            }
+                            },
                         }}
                         fullWidth
                     />
@@ -165,14 +164,14 @@ export class GameForm extends React.Component {
                     </Button>
                 </Grid>
             </Grid>
-        )
+        );
     }
 }
 
-const mapStateToProps = (state) => ({
-    players: state.players
+const mapStateToProps = state => ({
+    players: state.players,
 });
 
 
-const connectedComponent = connect(mapStateToProps)(GameForm)
+const connectedComponent = connect(mapStateToProps)(GameForm);
 export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

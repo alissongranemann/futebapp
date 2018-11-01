@@ -13,7 +13,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 
 export class PlayerListItem extends React.Component {
-
     onRemove = (e) => {
         e.preventDefault();
         this.props.startRemovePlayer({ id: this.props.id, groupId: this.props.groupId });
@@ -44,11 +43,10 @@ export class PlayerListItem extends React.Component {
             </ListItem>
         );
     }
-
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    startRemovePlayer: (data) => dispatch(startRemovePlayer(data))
+const mapDispatchToProps = dispatch => ({
+    startRemovePlayer: data => dispatch(startRemovePlayer(data)),
 });
 
 export default connect(undefined, mapDispatchToProps)(PlayerListItem);

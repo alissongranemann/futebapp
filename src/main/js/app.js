@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { firebase } from 'service/firebase';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetGroups } from './actions/groups';
-import { login, logout } from './actions/auth'
-import { firebase } from 'service/firebase';
+import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
 import 'styles.scss';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -18,12 +18,12 @@ const theme = createMuiTheme({
         htmlFontSize: 10,
         useNextVariants: true,
         h5: {
-            fontWeight: 700
-        }
+            fontWeight: 700,
+        },
     },
     palette: {
-        primary: green
-    }
+        primary: green,
+    },
 });
 
 const jsx = (
@@ -39,7 +39,7 @@ const renderApp = () => {
         ReactDOM.render(jsx, document.getElementById('app'));
         hasRendered = true;
     }
-}
+};
 
 ReactDOM.render(<LoadingPage />, document.getElementById('app'));
 
@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged((user) => {
             if (history.location.pathname === '/') {
                 history.push('/dashboard');
             }
-        })
+        });
     } else {
         store.dispatch(logout());
         renderApp();

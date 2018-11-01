@@ -1,10 +1,10 @@
 import React from 'react';
-import GroupList from './group/GroupList'
+import GroupList from './group/GroupList';
 
 const GroupDashboardPage = () => (
-  <div>
-    <GroupList />
-  </div>
+    <div>
+        <GroupList />
+    </div>
 );
 
 export default GroupDashboardPage;

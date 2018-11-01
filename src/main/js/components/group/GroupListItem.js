@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startRemoveGroup } from 'actions/groups';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -11,7 +11,6 @@ import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 
 export class GroupListItem extends React.Component {
-
     onRemove = (e) => {
         e.preventDefault();
         this.props.startRemoveGroup({ id: this.props.id });
@@ -41,11 +40,10 @@ export class GroupListItem extends React.Component {
             </Link>
         );
     }
-
 }
 
-const mapDispatchToProps = (dispatch) => ({
-    startRemoveGroup: (data) => dispatch(startRemoveGroup(data))
+const mapDispatchToProps = dispatch => ({
+    startRemoveGroup: data => dispatch(startRemoveGroup(data)),
 });
 
 const connectedComponent = connect(undefined, mapDispatchToProps)(GroupListItem);

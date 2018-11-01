@@ -5,20 +5,19 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
-import { withRouter } from "react-router";
+import { withRouter } from 'react-router';
 
 export class ResetPasswordPage extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             email: '',
-            error: ''
+            error: '',
         };
     }
 
-    handleChange = event => {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -67,14 +66,14 @@ export class ResetPasswordPage extends React.Component {
                     </form>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     startResetPassword: ({ email }) => dispatch(startResetPassword({ email })),
 });
 
 const connectedComponent = connect(undefined, mapDispatchToProps)(ResetPasswordPage);
-const styledComponent =  withStyles(positiveButtonStyles)(connectedComponent);
+const styledComponent = withStyles(positiveButtonStyles)(connectedComponent);
 export default withRouter(styledComponent);

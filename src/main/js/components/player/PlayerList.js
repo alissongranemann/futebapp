@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PlayerListItem from './PlayerListItem';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { positiveButtonStyles } from 'styles/button'
+import { positiveButtonStyles } from 'styles/button';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import combineStyles from 'styles/utils/combineStyles';
+import PlayerListItem from './PlayerListItem';
 
 const styles = {
     list: {
-        padding: 0
-    }
-}
+        padding: 0,
+    },
+};
 
 const PlayerList = (props) => {
     const { classes } = props;
@@ -31,15 +31,13 @@ const PlayerList = (props) => {
                                 Sem jogadores
                             </Typography>
                         ) : (
-                                props.players.map((player, index, arr) => {
-                                    return <PlayerListItem
-                                        key={player.id}
-                                        groupId={props.groupId}
-                                        {...player}
-                                        divider={index !== arr.length-1}
-                                    />;
-                                })
-                            )
+                            props.players.map((player, index, arr) => <PlayerListItem
+                                key={player.id}
+                                groupId={props.groupId}
+                                {...player}
+                                divider={index !== arr.length - 1}
+                            />)
+                        )
                     }
                 </List>
             </Paper>
@@ -54,11 +52,9 @@ const PlayerList = (props) => {
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        players: state.players
-    };
-};
+const mapStateToProps = state => ({
+    players: state.players,
+});
 
 const connectedComponent = connect(mapStateToProps)(PlayerList);
 export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

@@ -1,23 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import GroupListItem from './GroupListItem';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import { positiveButtonStyles } from 'styles/button'
+import { positiveButtonStyles } from 'styles/button';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
 import combineStyles from 'styles/utils/combineStyles';
+import GroupListItem from './GroupListItem';
 
 const styles = {
     list: {
-        padding: 0
-    }
-}
+        padding: 0,
+    },
+};
 
 export class GroupList extends React.Component {
-
     render() {
         const { classes } = this.props;
 
@@ -27,23 +26,21 @@ export class GroupList extends React.Component {
                     SEUS GRUPOS
                 </Typography>
                 <Paper>
-                <List className={classes.list}>
-                    {
-                        this.props.groups.length === 0 ? (
-                            <Typography variant="subtitle1" align="center" >
+                    <List className={classes.list}>
+                        {
+                            this.props.groups.length === 0 ? (
+                                <Typography variant="subtitle1" align="center" >
                                 Sem jogadores
-                            </Typography>
-                        ) : (
-                                this.props.groups.map((group, index, arr) => {
-                                    return <GroupListItem 
-                                                key={group.id} 
-                                                {...group}
-                                                divider={index !== arr.length-1}
-                                            />;
-                                })
+                                </Typography>
+                            ) : (
+                                this.props.groups.map((group, index, arr) => <GroupListItem
+                                    key={group.id}
+                                    {...group}
+                                    divider={index !== arr.length - 1}
+                                />)
                             )
-                    }
-                </List>
+                        }
+                    </List>
                 </Paper>
                 <div className="list-footer">
                     <Link to={'/group/create/'}>
@@ -55,13 +52,11 @@ export class GroupList extends React.Component {
             </div>
         );
     }
-};
+}
 
-const mapStateToProps = (state) => {
-    return {
-        groups: state.groups
-    };
-};
+const mapStateToProps = state => ({
+    groups: state.groups,
+});
 
 const connectedComponent = connect(mapStateToProps)(GroupList);
 export default withStyles(combineStyles(styles, positiveButtonStyles))(connectedComponent);

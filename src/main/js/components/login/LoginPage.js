@@ -8,18 +8,17 @@ import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
 
 export class LoginPage extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             email: '',
             password: '',
-            error: ''
+            error: '',
         };
     }
 
-    handleChange = event => {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -96,11 +95,11 @@ export class LoginPage extends React.Component {
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     startLoginGoogle: () => dispatch(startLoginGoogle()),
     startLoginFacebook: () => dispatch(startLoginFacebook()),
     startLoginEmail: ({ email, password }) => dispatch(startLoginEmail({ email, password })),

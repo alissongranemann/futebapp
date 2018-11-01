@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
 
 export class SignUpPage extends React.Component {
-
     constructor(props) {
         super(props);
 
@@ -15,11 +14,11 @@ export class SignUpPage extends React.Component {
             email: '',
             password: '',
             confirmPassword: '',
-            error: ''
+            error: '',
         };
     }
 
-    handleChange = event => {
+    handleChange = (event) => {
         this.setState({
             [event.target.name]: event.target.value,
         });
@@ -29,16 +28,16 @@ export class SignUpPage extends React.Component {
         e.preventDefault();
         if (!this.state.email || !this.state.password || !this.state.confirmPassword) {
             this.setState(() => ({ error: 'Preencha os campos obrigatórios.' }));
-        } else if( this.state.password !== this.state.confirmPassword) {
+        } else if (this.state.password !== this.state.confirmPassword) {
             this.setState(() => ({ error: 'Senha/Confirmar senha não são iguais.' }));
         } else {
             this.setState(() => ({ error: '' }));
             this.props.startSignUp({
                 email: this.state.email,
-                password: this.state.password
+                password: this.state.password,
             }).catch((err) => {
                 this.setState(() => ({ error: err.message }));
-            });;
+            });
         }
     };
 
@@ -51,47 +50,47 @@ export class SignUpPage extends React.Component {
                     <span className="box-layout__title">
                         Novo usuário
                     </span>
-                        <form className="login-form" onSubmit={this.onSubmit}>
-                            {this.state.error && <p>{this.state.error}</p>}
-                            <TextField
-                                label="Email *"
-                                margin="normal"
-                                variant="outlined"
-                                name='email'
-                                onChange={this.handleChange}
-                                value={this.state.email}
-                            />
-                            <TextField
-                                label="Senha *"
-                                margin="normal"
-                                variant="outlined"
-                                name='password'
-                                type="password"
-                                onChange={this.handleChange}
-                                value={this.state.password}
-                            />
-                            <TextField
-                                label="Confirmar senha *"
-                                margin="normal"
-                                variant="outlined"
-                                name='confirmPassword'
-                                type="password"
-                                onChange={this.handleChange}
-                                value={this.state.confirmPassword}
-                            />
-                            <br />
-                            <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
+                    <form className="login-form" onSubmit={this.onSubmit}>
+                        {this.state.error && <p>{this.state.error}</p>}
+                        <TextField
+                            label="Email *"
+                            margin="normal"
+                            variant="outlined"
+                            name='email'
+                            onChange={this.handleChange}
+                            value={this.state.email}
+                        />
+                        <TextField
+                            label="Senha *"
+                            margin="normal"
+                            variant="outlined"
+                            name='password'
+                            type="password"
+                            onChange={this.handleChange}
+                            value={this.state.password}
+                        />
+                        <TextField
+                            label="Confirmar senha *"
+                            margin="normal"
+                            variant="outlined"
+                            name='confirmPassword'
+                            type="password"
+                            onChange={this.handleChange}
+                            value={this.state.confirmPassword}
+                        />
+                        <br />
+                        <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
                                 Registrar
-                            </Button>
-                            <br />
-                        </form>
+                        </Button>
+                        <br />
+                    </form>
                 </div>
             </div>
-        )
+        );
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     startSignUp: ({ email, password }) => dispatch(startSignUp({ email, password })),
 });
 

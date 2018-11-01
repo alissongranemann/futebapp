@@ -8,12 +8,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import TextField from '@material-ui/core/TextField';
 
 export class TeamComponent extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
-            labelWidth: 0
+            labelWidth: 0,
         };
     }
 
@@ -33,7 +32,7 @@ export class TeamComponent extends React.Component {
                 <h3>{this.props.name}</h3>
                 <FormControl variant="outlined">
                     <InputLabel
-                        ref={ref => {
+                        ref={(ref) => {
                             this.InputLabelRef = ref;
                         }}
                         htmlFor="outlined-age-simple"
@@ -52,34 +51,30 @@ export class TeamComponent extends React.Component {
                         }
                     >
                         {
-                            this.props.availablePlayers.map((player, index) => {
-                                return <MenuItem
-                                    key={index}
-                                    value={player.name}
-                                >
-                                    {player.name}
-                                </MenuItem>
-                            })
+                            this.props.availablePlayers.map((player, index) => <MenuItem
+                                key={index}
+                                value={player.name}
+                            >
+                                {player.name}
+                            </MenuItem>)
                         }
                     </Select>
                 </FormControl>
                 <br />
                 {
-                    this.props.teamPlayers.map((player, index) => {
-                        return (
-                            <TextField
-                                key={index}
-                                margin="normal"
-                                variant="outlined"
-                                name='name'
-                                value={player.name}
-                                disabled
-                            />
-                        )
-                    })
+                    this.props.teamPlayers.map((player, index) => (
+                        <TextField
+                            key={index}
+                            margin="normal"
+                            variant="outlined"
+                            name='name'
+                            value={player.name}
+                            disabled
+                        />
+                    ))
                 }
             </div>
-        )
+        );
     }
 }
 

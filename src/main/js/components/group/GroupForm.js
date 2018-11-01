@@ -3,20 +3,19 @@ import { withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
-import combineStyles from 'styles/utils/combineStyles'
+import combineStyles from 'styles/utils/combineStyles';
 
 export class GroupForm extends React.Component {
-
     constructor(props) {
         super(props);
 
         this.state = {
             name: props.group ? props.group.name : '',
-            error: ''
+            error: '',
         };
     }
 
-    handleChange = name => event => {
+    handleChange = name => (event) => {
         this.setState({
             [name]: event.target.value,
         });
@@ -49,12 +48,12 @@ export class GroupForm extends React.Component {
                     InputLabelProps={{
                         classes: {
                             root: classes.resize,
-                        }
+                        },
                     }}
                     InputProps={{
                         classes: {
                             input: classes.resize,
-                        }
+                        },
                     }}
                 />
                 <div className="form-footer">
@@ -63,7 +62,7 @@ export class GroupForm extends React.Component {
                     </Button>
                 </div>
             </form>
-        )
+        );
     }
 }
 

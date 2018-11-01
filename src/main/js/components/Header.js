@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { startLogout } from 'actions/auth'
+import { startLogout } from 'actions/auth';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     button: {
-        color: 'white'
-    }
-}
+        color: 'white',
+    },
+};
 
 const Header = (props) => {
     const { classes } = props;
@@ -26,11 +26,11 @@ const Header = (props) => {
                 </div>
             </div>
         </header>
-    )
+    );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    startLogout: () => dispatch(startLogout())
+const mapDispatchToProps = dispatch => ({
+    startLogout: () => dispatch(startLogout()),
 });
 
 const connectedComponent = connect(undefined, mapDispatchToProps)(Header);

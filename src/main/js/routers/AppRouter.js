@@ -1,6 +1,6 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
-import createBrowserHistory from 'history/createBrowserHistory'
+import createBrowserHistory from 'history/createBrowserHistory';
 import GroupDashboardPage from 'components/GroupDashboardPage';
 import AddGroupPage from 'components/group/AddGroupPage';
 import EditGroupPage from 'components/group/EditGroupPage';
