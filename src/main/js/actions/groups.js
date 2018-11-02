@@ -65,7 +65,7 @@ export const startSetGroups = () => (dispatch, getState) => {
                     ...value,
                 };
                 dispatch(addGroup(group));
-                Object.keys(value.games).forEach((gameKey) => {
+                for (const gameKey in value.games) { // eslint-disable-line
                     if (Object.prototype.hasOwnProperty.call(value.games, gameKey)) {
                         const gamePromise = database.ref('games').child(gameKey).once('value').then((gameSnapshot) => {
                             const game = {
@@ -76,8 +76,8 @@ export const startSetGroups = () => (dispatch, getState) => {
                         });
                         groupPromises.push(gamePromise);
                     }
-                });
-                Object.keys(value.players).forEach((playerKey) => {
+                }
+                for (const playerKey in value.players) { // eslint-disable-line
                     if (Object.prototype.hasOwnProperty.call(value.players, playerKey)) {
                         const playerPromise = database.ref('players').child(playerKey).once('value').then((playerSnapshot) => {
                             const player = {
@@ -88,7 +88,7 @@ export const startSetGroups = () => (dispatch, getState) => {
                         });
                         groupPromises.push(playerPromise);
                     }
-                });
+                }
                 return Promise.all(groupPromises);
             });
             userPromises.push(groupPromise);
