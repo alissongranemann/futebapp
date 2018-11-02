@@ -1,22 +1,9 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { positiveButtonStyles } from 'styles/button';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
+import {
+    TextField, FormControl, InputLabel, Grid, Select, MenuItem, OutlinedInput,
+} from '@material-ui/core';
 import ReactDOM from 'react-dom';
-import Grid from '@material-ui/core/Grid';
-import combineStyles from 'styles/utils/combineStyles';
-
-const styles = {
-    buttonItem: {
-        alignSelf: 'flex-end',
-    },
-};
+import { FormWrapper } from '../common/FormWrapper';
 
 const positions = [
     'GOLEIRO', 'ZAGUEIRO', 'LATERAL', 'MEIA', 'ATACANTE',
@@ -61,67 +48,59 @@ export class PlayerForm extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <Grid container spacing={16} direction='column'>
-                {this.state.error && <p>{this.state.error}</p>}
-                <Grid item xs={12}>
-                    <TextField
-                        label="Nome *"
-                        variant="outlined"
-                        name='name'
-                        onChange={this.handleChange}
-                        value={this.state.name}
-                        fullWidth
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <FormControl variant="outlined" fullWidth>
-                        <InputLabel
-                            ref={(ref) => {
-                                this.InputLabelRef = ref;
-                            }}
-                            htmlFor="outlined-age-simple"
-                        >
-                            Posição
-                        </InputLabel>
-                        <Select
-                            value={this.state.position}
-                            name='position'
+            <FormWrapper
+                onSubmit={this.onSubmit}
+                onCancel={this.props.onCancel}
+            >
+                <Grid container spacing={16} direction='column'>
+                    {this.state.error && <p>{this.state.error}</p>}
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Nome *"
+                            variant="outlined"
+                            name='name'
                             onChange={this.handleChange}
-                            displayEmpty
-                            input={
-                                <OutlinedInput
-                                    labelWidth={this.state.labelWidth}
-                                />
-                            }
-                        >
-                            {
-                                positions.map((position, index) => <MenuItem
-                                    key={index}
-                                    value={position}
-                                >
-                                    {position}
-                                </MenuItem>)
-                            }
-                        </Select>
-                    </FormControl>
+                            value={this.state.name}
+                            fullWidth
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl variant="outlined" fullWidth>
+                            <InputLabel
+                                ref={(ref) => {
+                                    this.InputLabelRef = ref;
+                                }}
+                                htmlFor="outlined-age-simple"
+                            >
+                                Posição
+                            </InputLabel>
+                            <Select
+                                value={this.state.position}
+                                name='position'
+                                onChange={this.handleChange}
+                                displayEmpty
+                                input={
+                                    <OutlinedInput
+                                        labelWidth={this.state.labelWidth}
+                                    />
+                                }
+                            >
+                                {
+                                    positions.map((position, index) => <MenuItem
+                                        key={index}
+                                        value={position}
+                                    >
+                                        {position}
+                                    </MenuItem>)
+                                }
+                            </Select>
+                        </FormControl>
+                    </Grid>
                 </Grid>
-                <Grid item xs={3} className={classes.buttonItem}>
-                    <Button
-                        variant="contained"
-                        size="large"
-                        color='primary'
-                        className={classes.button}
-                        onClick={this.onSubmit}
-                    >
-                        Salvar
-                    </Button>
-                </Grid>
-            </Grid>
+            </FormWrapper>
         );
     }
 }
 
-export default withStyles(combineStyles(styles, positiveButtonStyles))(PlayerForm);
+export default PlayerForm;

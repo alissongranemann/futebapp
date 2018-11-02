@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startEditPlayer } from 'actions/players';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
+import FormPageWrapper from '../common/FormPageWrapper';
 import PlayerForm from './PlayerForm';
 
 export class EditPlayerPage extends React.Component {
@@ -14,24 +12,12 @@ export class EditPlayerPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="page-header">
-                    <div className="content-container page-header__action">
-                        <Typography variant="h4">
-                            EDITAR JOGADOR
-                        </Typography>
-                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
-                            <CloseIcon fontSize="large" />
-                        </IconButton>
-                    </div>
-                </div>
-                <div className="content-container">
-                    <PlayerForm
-                        player={this.props.player}
-                        onSubmit={this.onSubmit}
-                    />
-                </div>
-            </div>
+            <FormPageWrapper title="Editar jogador">
+                <PlayerForm
+                    onSubmit={this.onSubmit}
+                    onCancel={this.props.history.goBack}
+                />
+            </FormPageWrapper>
         );
     }
 }

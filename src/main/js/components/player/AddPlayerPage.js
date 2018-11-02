@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startAddPlayer } from 'actions/players';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
 import PlayerForm from './PlayerForm';
+import FormPageWrapper from '../common/FormPageWrapper';
 
 export class AddPlayerPage extends React.Component {
     onSubmit = (player) => {
@@ -14,24 +12,12 @@ export class AddPlayerPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1></h1>
-                <div className="page-header">
-                    <div className="content-container page-header__action">
-                        <Typography variant="h4">
-                            CRIAR JOGADOR
-                        </Typography>
-                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
-                            <CloseIcon fontSize="large" />
-                        </IconButton>
-                    </div>
-                </div>
-                <div className="content-container">
-                    <PlayerForm
-                        onSubmit={this.onSubmit}
-                    />
-                </div>
-            </div>
+            <FormPageWrapper title="Criar jogador">
+                <PlayerForm
+                    onSubmit={this.onSubmit}
+                    onCancel={this.props.history.goBack}
+                />
+            </FormPageWrapper>
         );
     }
 }
