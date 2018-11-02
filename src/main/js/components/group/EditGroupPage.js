@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startEditGroup } from 'actions/groups';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import Typography from '@material-ui/core/Typography';
 import GroupForm from './GroupForm';
+import FormPageWrapper from '../common/FormPageWrapper';
 
 export class EditGroupPage extends React.Component {
     onSubmit = (group) => {
@@ -14,24 +12,13 @@ export class EditGroupPage extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="page-header">
-                    <div className="content-container page-header__action">
-                        <Typography variant="h4">
-                            EDITAR GRUPO
-                        </Typography>
-                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
-                            <CloseIcon fontSize="large" />
-                        </IconButton>
-                    </div>
-                </div>
-                <div className="content-container">
-                    <GroupForm
-                        group={this.props.group}
-                        onSubmit={this.onSubmit}
-                    />
-                </div>
-            </div>
+            <FormPageWrapper title="Editar grupo">
+                <GroupForm
+                    group={this.props.group}
+                    onSubmit={this.onSubmit}
+                    onCancel={this.props.history.goBack}
+                />
+            </FormPageWrapper>
         );
     }
 }

@@ -1,8 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { positiveButtonStyles } from 'styles/button';
+import Grid from '@material-ui/core/Grid';
+import { FormWrapper } from '../common/FormWrapper';
 
 export class GroupForm extends React.Component {
     constructor(props) {
@@ -14,9 +13,9 @@ export class GroupForm extends React.Component {
         };
     }
 
-    handleChange = name => (event) => {
+    handleChange = (event) => {
         this.setState({
-            [name]: event.target.value,
+            [event.target.name]: event.target.value,
         });
     };
 
@@ -33,36 +32,27 @@ export class GroupForm extends React.Component {
     };
 
     render() {
-        const { classes } = this.props;
-
         return (
-            <form className="form" onSubmit={this.onSubmit}>
-                {this.state.error && <p>{this.state.error}</p>}
-                <TextField
-                    label="Nome *"
-                    margin="normal"
-                    variant="outlined"
-                    onChange={this.handleChange('name')}
-                    value={this.state.name}
-                    InputLabelProps={{
-                        classes: {
-                            root: classes.resize,
-                        },
-                    }}
-                    InputProps={{
-                        classes: {
-                            input: classes.resize,
-                        },
-                    }}
-                />
-                <div className="form-footer">
-                    <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
-                        Salvar
-                    </Button>
-                </div>
-            </form>
+            <FormWrapper
+                onSubmit={this.onSubmit}
+                onCancel={this.props.onCancel}
+            >
+                <Grid container spacing={16} direction='column'>
+                    {this.state.error && <p>{this.state.error}</p>}
+                    <Grid item xs={12}>
+                        <TextField
+                            label="Nome *"
+                            variant="outlined"
+                            name='name'
+                            onChange={this.handleChange}
+                            value={this.state.name}
+                            fullWidth
+                        />
+                    </Grid>
+                </Grid>
+            </FormWrapper>
         );
     }
 }
 
-export default withStyles(positiveButtonStyles)(GroupForm);
+export default GroupForm;
