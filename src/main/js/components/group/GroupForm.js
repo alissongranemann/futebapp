@@ -3,7 +3,6 @@ import { withStyles } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
-import combineStyles from 'styles/utils/combineStyles';
 
 export class GroupForm extends React.Component {
     constructor(props) {

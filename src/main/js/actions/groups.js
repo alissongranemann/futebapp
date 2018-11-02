@@ -65,26 +65,30 @@ export const startSetGroups = () => (dispatch, getState) => {
                     ...value,
                 };
                 dispatch(addGroup(group));
-                for (var key in value.games) {
-                    const gamePromise = database.ref('games').child(key).once('value').then((gameSnapshot) => {
-                        const game = {
-                            id: gameSnapshot.key,
-                            ...gameSnapshot.val(),
-                        };
-                        dispatch(addGame(game));
-                    });
-                    groupPromises.push(gamePromise);
-                }
-                for (var key in value.players) {
-                    const playerPromise = database.ref('players').child(key).once('value').then((playerSnapshot) => {
-                        const player = {
-                            id: playerSnapshot.key,
-                            ...playerSnapshot.val(),
-                        };
-                        dispatch(addPlayer(player));
-                    });
-                    groupPromises.push(playerPromise);
-                }
+                Object.keys(value.games).forEach((gameKey) => {
+                    if (Object.prototype.hasOwnProperty.call(value.games, gameKey)) {
+                        const gamePromise = database.ref('games').child(gameKey).once('value').then((gameSnapshot) => {
+                            const game = {
+                                id: gameSnapshot.key,
+                                ...gameSnapshot.val(),
+                            };
+                            dispatch(addGame(game));
+                        });
+                        groupPromises.push(gamePromise);
+                    }
+                });
+                Object.keys(value.players).forEach((playerKey) => {
+                    if (Object.prototype.hasOwnProperty.call(value.players, playerKey)) {
+                        const playerPromise = database.ref('players').child(playerKey).once('value').then((playerSnapshot) => {
+                            const player = {
+                                id: playerSnapshot.key,
+                                ...playerSnapshot.val(),
+                            };
+                            dispatch(addPlayer(player));
+                        });
+                        groupPromises.push(playerPromise);
+                    }
+                });
                 return Promise.all(groupPromises);
             });
             userPromises.push(groupPromise);

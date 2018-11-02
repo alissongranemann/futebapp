@@ -66,7 +66,8 @@ export class GameForm extends React.Component {
         const team = this.state.teams[teamIndex];
         const selectedPlayer = { name: value };
         team.players = [...team.players, selectedPlayer];
-        const availablePlayers = this.state.availablePlayers.filter(player => value !== player.name);
+        const availablePlayers = this.state.availablePlayers
+            .filter(player => value !== player.name);
         this.setState(() => ({ availablePlayers }));
     };
 

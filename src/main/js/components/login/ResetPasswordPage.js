@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 
 export class ResetPasswordPage extends React.Component {
     constructor(props) {

@@ -19,8 +19,7 @@ export default () => {
     });
     const rootReducer = (state, action) => {
         if (action.type === 'LOGOUT') {
-            // eslint-disable-next-line
-            state = undefined;
+            state = undefined; // eslint-disable-line
         }
         return appReducer(state, action);
     };

@@ -18,18 +18,18 @@ module.exports = (env) => {
         entry: './src/main/js/app.js',
         output: {
             path: path.join(__dirname, 'public', 'dist'),
-            filename: 'bundle.js'
+            filename: 'bundle.js',
         },
         module: {
             rules: [{
                 loader: 'babel-loader',
                 test: /\.js$/,
-                exclude: /node_modules/
+                exclude: /node_modules/,
             },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: ['babel-loader', 'eslint-loader']
+                use: ['babel-loader', 'eslint-loader'],
             },
 	    {
                 test: /\.s?css$/,
@@ -38,18 +38,18 @@ module.exports = (env) => {
                         {
                             loader: 'css-loader',
                             options: {
-                                sourceMap: true
-                            }
+                                sourceMap: true,
+                            },
                         },
                         {
                             loader: 'sass-loader',
                             options: {
-                              sourceMap: true
-                            }
-                        }
-                    ]
-                })
-            }]
+                                sourceMap: true,
+                            },
+                        },
+                    ],
+                }),
+            }],
         },
         plugins: [
             CSSExtract,
@@ -59,8 +59,8 @@ module.exports = (env) => {
                 'process.env.FIREBASE_DATABASE_URL': JSON.stringify(process.env.FIREBASE_DATABASE_URL),
                 'process.env.FIREBASE_PROJECT_ID': JSON.stringify(process.env.FIREBASE_PROJECT_ID),
                 'process.env.FIREBASE_STORAGE_BUCKET': JSON.stringify(process.env.FIREBASE_STORAGE_BUCKET),
-                'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID)
-            })
+                'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
+            }),
         ],
         mode: isProduction ? 'production' : 'development',
         devtool: isProduction ? 'source-map' : 'inline-source-map',
@@ -72,15 +72,15 @@ module.exports = (env) => {
             port: 3000,
             watchContentBase: true,
             watchOptions: {
-                ignored: /node_modules/
-            }
+                ignored: /node_modules/,
+            },
         },
         resolve: {
             modules: [
                 path.resolve('./src/main/js'),
                 path.resolve('./src/main/css'),
-                path.resolve('./node_modules')
-            ]
-        }
-    }
+                path.resolve('./node_modules'),
+            ],
+        },
+    };
 };

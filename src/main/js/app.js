@@ -1,5 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import green from '@material-ui/core/colors/green';
 import { Provider } from 'react-redux';
 import { firebase } from 'service/firebase';
 import AppRouter, { history } from './routers/AppRouter';
@@ -7,9 +9,7 @@ import configureStore from './store/configureStore';
 import { startSetGroups } from './actions/groups';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
-import 'styles.scss';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import green from '@material-ui/core/colors/green';
+import 'styles.scss'; // eslint-disable-line
 
 const store = configureStore();
 
