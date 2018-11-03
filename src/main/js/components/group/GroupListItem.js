@@ -2,14 +2,18 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startRemoveGroup } from 'actions/groups';
-import IconButton from '@material-ui/core/IconButton';
-import EditIcon from '@material-ui/icons/Edit';
-import DeleteIcon from '@material-ui/icons/Delete';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
-import ListItemText from '@material-ui/core/ListItemText';
 import { compose } from 'redux';
+import Paper from '@material-ui/core/Paper';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import { withStyles } from '@material-ui/core/styles';
+import ListItemAction from '../common/ListItemAction';
 
+const styles = {
+    root: {
+        marginBottom: 10,
+    },
+};
 export class GroupListItem extends React.Component {
     onRemove = (e) => {
         e.preventDefault();
@@ -22,22 +26,26 @@ export class GroupListItem extends React.Component {
     }
 
     render() {
+        const {
+            classes, id, name, players,
+        } = this.props;
         return (
-            <Link to={`/group/${this.props.id}`}>
-                <ListItem divider={this.props.divider}>
-                    <ListItemText
-                        primary={this.props.name}
-                    />
-                    <ListItemSecondaryAction>
-                        <IconButton aria-label="Edit" onClick={this.onEdit}>
-                            <EditIcon />
-                        </IconButton>
-                        <IconButton aria-label="Delete" onClick={this.onRemove}>
-                            <DeleteIcon />
-                        </IconButton>
-                    </ListItemSecondaryAction>
-                </ListItem>
-            </Link>
+            <Paper className={classes.root}>
+                <Link to={`/group/${id}`}>
+                    <ListItem>
+                        <ListItemText
+                            primary={name}
+                            secondary={
+                                players ? `${Object.entries(players).length} jogadores` : 'Sem jogadores'
+                            }
+                        />
+                        <ListItemAction
+                            onEdit={this.onEdit}
+                            onRemove={this.onRemove}
+                        />
+                    </ListItem>
+                </Link>
+            </Paper>
         );
     }
 }
@@ -47,4 +55,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default compose(withRouter, connect(undefined, mapDispatchToProps))(GroupListItem);
+export default compose(withRouter, withStyles(styles),
+    connect(undefined, mapDispatchToProps))(GroupListItem);
