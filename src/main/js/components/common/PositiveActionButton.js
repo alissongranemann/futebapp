@@ -9,8 +9,8 @@ const styles = {
     },
 };
 
-const SaveButton = (props) => {
-    const { classes, onClick } = props;
+export const PositiveActionButton = (props) => {
+    const { classes, onClick, label } = props;
     return (
         <Button
             variant="contained"
@@ -19,9 +19,9 @@ const SaveButton = (props) => {
             className={classes.button}
             onClick={onClick}
         >
-            Salvar
+            {label}
         </Button>
     );
 };
 
-export default withStyles(styles)(SaveButton);
+export default withStyles(styles)(PositiveActionButton);

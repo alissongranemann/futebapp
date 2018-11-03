@@ -1,16 +1,16 @@
 import React from 'react';
-import SaveButton from './SaveButton';
+import PositiveActionButton from './PositiveActionButton';
 import CancelButton from './CancelButton';
 
 export class FormWrapper extends React.Component {
     render() {
-        const { onSubmit, onCancel } = this.props;
+        const { onSubmit, onCancel, children } = this.props;
         return (
             <React.Fragment>
-                {this.props.children}
-                <div className="form-footer">
+                {children}
+                <div className="form__footer">
                     <CancelButton onClick={onCancel} />
-                    <SaveButton onClick={onSubmit}/>
+                    <PositiveActionButton label="Salvar" onClick={onSubmit}/>
                 </div>
             </React.Fragment >
         );
