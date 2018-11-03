@@ -18,8 +18,8 @@ export class GameListItem extends React.Component {
                 <ListItemText
                     primary={this.props.location}
                     secondary={
-                        `${moment(this.props.time).format('HH:mm')} ${
-                            moment(this.props.date).format('DD/MM')}`
+                        `${moment(this.props.date).format('DD/MM/YY')} -
+                            ${moment(this.props.time).format('HH:mm')}`
                     }
                 />
                 <ListItemAction
