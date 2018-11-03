@@ -15,7 +15,6 @@ export class AddGamePage extends React.Component {
             <FormPageWrapper title="Criar pelada">
                 <GameForm
                     onSubmit={this.onSubmit}
-                    onCancel={this.props.history.goBack}
                 />
             </FormPageWrapper>
         );

@@ -16,7 +16,6 @@ export class EditGamePage extends React.Component {
                 <GameForm
                     game={this.props.game}
                     onSubmit={this.onSubmit}
-                    onCancel={this.props.history.goBack}
                 />
             </FormPageWrapper>
         );

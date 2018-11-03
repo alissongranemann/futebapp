@@ -15,7 +15,6 @@ export class AddGroupPage extends React.Component {
             <FormPageWrapper title="Criar grupo">
                 <GroupForm
                     onSubmit={this.onSubmit}
-                    onCancel={this.props.history.goBack}
                 />
             </FormPageWrapper>
         );

@@ -4,26 +4,25 @@ import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import { withRouter } from 'react-router-dom';
 
-export class FormPageWrapper extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                <div className="page-header">
-                    <div className="content-container page-header__action">
-                        <Typography variant="h4">
-                            {this.props.title.toUpperCase()}
-                        </Typography>
-                        <IconButton aria-label="Cancel" onClick={this.props.history.goBack}>
-                            <CloseIcon fontSize="large" />
-                        </IconButton>
-                    </div>
+const FormPageWrapper = (props) => {
+    const { title, history, children } = props;
+    return (
+        <React.Fragment>
+            <div className="page-header">
+                <div className="content-container page-header__action">
+                    <Typography variant="h4">
+                        {title.toUpperCase()}
+                    </Typography>
+                    <IconButton aria-label="Cancel" onClick={history.goBack}>
+                        <CloseIcon fontSize="large" />
+                    </IconButton>
                 </div>
-                <div className="content-container">
-                    {this.props.children}
-                </div>
-            </React.Fragment >
-        );
-    }
-}
+            </div>
+            <div className="content-container">
+                {children}
+            </div>
+        </React.Fragment >
+    );
+};
 
 export default withRouter(FormPageWrapper);

@@ -15,7 +15,6 @@ export class EditPlayerPage extends React.Component {
             <FormPageWrapper title="Editar jogador">
                 <PlayerForm
                     onSubmit={this.onSubmit}
-                    onCancel={this.props.history.goBack}
                 />
             </FormPageWrapper>
         );

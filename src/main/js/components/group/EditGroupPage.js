@@ -16,7 +16,6 @@ export class EditGroupPage extends React.Component {
                 <GroupForm
                     group={this.props.group}
                     onSubmit={this.onSubmit}
-                    onCancel={this.props.history.goBack}
                 />
             </FormPageWrapper>
         );

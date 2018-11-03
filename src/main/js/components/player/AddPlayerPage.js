@@ -15,7 +15,6 @@ export class AddPlayerPage extends React.Component {
             <FormPageWrapper title="Criar jogador">
                 <PlayerForm
                     onSubmit={this.onSubmit}
-                    onCancel={this.props.history.goBack}
                 />
             </FormPageWrapper>
         );

@@ -51,7 +51,6 @@ export class PlayerForm extends React.Component {
         return (
             <FormWrapper
                 onSubmit={this.onSubmit}
-                onCancel={this.props.onCancel}
             >
                 <Grid container spacing={16} direction='column'>
                     {this.state.error && <p>{this.state.error}</p>}

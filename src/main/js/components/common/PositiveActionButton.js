@@ -9,7 +9,7 @@ const styles = {
     },
 };
 
-export const PositiveActionButton = (props) => {
+const PositiveActionButton = (props) => {
     const { classes, onClick, label } = props;
     return (
         <Button

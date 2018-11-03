@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
+import List from '@material-ui/core/List';
 import GroupListItem from './GroupListItem';
-import { ListWrapper } from '../common/ListWrapper';
+import ListWrapper from '../common/ListWrapper';
 
 export class GroupList extends React.Component {
     render() {
@@ -12,19 +13,21 @@ export class GroupList extends React.Component {
                 createLink="/group/create/"
                 createButtonLabel="Criar grupo"
             >
-                {
-                    this.props.groups.length === 0 ? (
-                        <Typography variant="subtitle1" align="center" >
-                            Sem grupos
-                        </Typography>
-                    ) : (
-                        this.props.groups.map(group => <GroupListItem
-                            key={group.id}
-                            {...group}
-                        />)
-                    )
-                }
-            </ListWrapper>
+                <List className="list__body">
+                    {
+                        this.props.groups.length === 0 ? (
+                            <Typography variant="subtitle1" align="center" >
+                                Sem grupos
+                            </Typography>
+                        ) : (
+                            this.props.groups.map(group => <GroupListItem
+                                key={group.id}
+                                {...group}
+                            />)
+                        )
+                    }
+                </List>
+            </ListWrapper >
         );
     }
 }

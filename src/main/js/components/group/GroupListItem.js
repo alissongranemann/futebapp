@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { startRemoveGroup } from 'actions/groups';
 import { compose } from 'redux';
@@ -20,11 +20,6 @@ export class GroupListItem extends React.Component {
         this.props.startRemoveGroup({ id: this.props.id });
     };
 
-    onEdit = (e) => {
-        e.preventDefault();
-        this.props.history.push(`/group/edit/${this.props.id}`);
-    }
-
     render() {
         const {
             classes, id, name, players,
@@ -40,7 +35,7 @@ export class GroupListItem extends React.Component {
                             }
                         />
                         <ListItemAction
-                            onEdit={this.onEdit}
+                            editLink={`/group/edit/${this.props.id}`}
                             onRemove={this.onRemove}
                         />
                     </ListItem>
@@ -55,5 +50,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-export default compose(withRouter, withStyles(styles),
+export default compose(withStyles(styles),
     connect(undefined, mapDispatchToProps))(GroupListItem);
