@@ -6,8 +6,8 @@ import AddGroupPage from 'components/group/AddGroupPage';
 import EditGroupPage from 'components/group/EditGroupPage';
 import ViewGroupPage from 'components/group/ViewGroupPage';
 import NotFoundPage from 'components/NotFoundPage';
-import AddGamePage from 'components/game/AddGamePage';
-import EditGamePage from 'components/game/EditGamePage';
+import AddMatchPage from 'components/match/AddMatchPage';
+import EditMatchPage from 'components/match/EditMatchPage';
 import AddPlayerPage from 'components/player/AddPlayerPage';
 import LoginPage from 'components/login/LoginPage';
 import SignUpPage from 'components/login/SignUpPage';
@@ -29,8 +29,8 @@ const AppRouter = () => (
                 <PrivateRoute path="/group/create" component={AddGroupPage} />
                 <PrivateRoute path="/group/edit/:id" component={EditGroupPage} />
                 <PrivateRoute path="/group/:id" component={ViewGroupPage} exact={true} />
-                <PrivateRoute path="/group/:groupId/game/create" component={AddGamePage} />
-                <PrivateRoute path="/game/edit/:id" component={EditGamePage} />
+                <PrivateRoute path="/group/:groupId/match/create" component={AddMatchPage} />
+                <PrivateRoute path="/match/edit/:id" component={EditMatchPage} />
                 <PrivateRoute path="/group/:groupId/player/create" component={AddPlayerPage} />
                 <PrivateRoute path="/player/edit/:id" component={EditPlayerPage} />
                 <Route component={NotFoundPage} />

@@ -4,26 +4,26 @@ import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
 import { Paper } from '@material-ui/core';
 import ListWrapper from '../common/ListWrapper';
-import GameListItem from './GameListItem';
+import MatchListItem from './MatchListItem';
 
-const GameList = props => (
+const MatchList = props => (
     <ListWrapper
         title="Peladas"
-        createLink={`/group/${props.groupId}/game/create/`}
+        createLink={`/group/${props.groupId}/match/create/`}
         createButtonLabel="Criar pelada"
     >
         <Paper>
             <List className="list__body">
                 {
-                    props.games.length === 0 ? (
+                    props.matches.length === 0 ? (
                         <Typography variant="subtitle1" align="center" >
                             Sem peladas
                         </Typography>
                     ) : (
-                        props.games.map((game, index, arr) => <GameListItem
-                            key={game.id}
+                        props.matches.map((match, index, arr) => <MatchListItem
+                            key={match.id}
                             groupId={props.groupId}
-                            {...game}
+                            {...match}
                             divider={index !== arr.length - 1}
                         />)
                     )
@@ -34,7 +34,7 @@ const GameList = props => (
 );
 
 const mapStateToProps = (state, props) => ({
-    games: state.games.filter(game => game.group === props.groupId),
+    matches: state.matches.filter(match => match.group === props.groupId),
 });
 
-export default connect(mapStateToProps)(GameList);
+export default connect(mapStateToProps)(MatchList);

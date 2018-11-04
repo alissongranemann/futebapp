@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import GameList from 'components/game/GameList';
+import MatchList from 'components/match/MatchList';
 import PlayerList from 'components/player/PlayerList';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
@@ -18,7 +18,7 @@ const ViewGroupPage = props => (
                 </IconButton>
             </div>
         </div>
-        <GameList groupId={props.group.id} />
+        <MatchList groupId={props.group.id} />
         <PlayerList groupId={props.group.id} />
     </div>
 );

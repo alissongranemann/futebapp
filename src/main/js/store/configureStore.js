@@ -3,7 +3,7 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import groupsReducer from 'reducers/groups';
-import gamesReducer from 'reducers/games';
+import matchesReducer from 'reducers/matches';
 import playersReducer from 'reducers/players';
 import authReducer from 'reducers/auth';
 
@@ -13,7 +13,7 @@ const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export default () => {
     const appReducer = combineReducers({
         groups: groupsReducer,
-        games: gamesReducer,
+        matches: matchesReducer,
         players: playersReducer,
         auth: authReducer,
     });

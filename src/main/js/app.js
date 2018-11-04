@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';
-import red from '@material-ui/core/colors/red';
 import { Provider } from 'react-redux';
 import { firebase } from 'service/firebase';
 import AppRouter, { history } from './routers/AppRouter';
@@ -24,7 +23,6 @@ const theme = createMuiTheme({
     },
     palette: {
         primary: green,
-        secondary: red,
     },
 });
 

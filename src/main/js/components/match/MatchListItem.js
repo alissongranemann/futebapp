@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { startRemoveGame } from 'actions/games';
+import { startRemoveMatch } from 'actions/matches';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import moment from 'moment';
 import ListItemAction from '../common/ListItemAction';
 
-export class GameListItem extends React.Component {
+export class MatchListItem extends React.Component {
     onRemove = (e) => {
         e.preventDefault();
-        this.props.startRemoveGame({ id: this.props.id, groupId: this.props.groupId });
+        this.props.startRemoveMatch({ id: this.props.id, groupId: this.props.groupId });
     };
 
     render() {
@@ -23,7 +23,7 @@ export class GameListItem extends React.Component {
                     }
                 />
                 <ListItemAction
-                    editLink={`/game/edit/${this.props.id}`}
+                    editLink={`/match/edit/${this.props.id}`}
                     onRemove={this.onRemove}
                 />
             </ListItem>
@@ -32,7 +32,7 @@ export class GameListItem extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-    startRemoveGame: data => dispatch(startRemoveGame(data)),
+    startRemoveMatch: data => dispatch(startRemoveMatch(data)),
 });
 
-export default connect(undefined, mapDispatchToProps)(GameListItem);
+export default connect(undefined, mapDispatchToProps)(MatchListItem);

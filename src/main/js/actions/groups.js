@@ -1,5 +1,5 @@
 import database from 'service/firebase';
-import { addGame } from './games';
+import { addMatch } from './matches';
 import { addPlayer } from './players';
 
 export const addGroup = group => ({
@@ -65,16 +65,16 @@ export const startSetGroups = () => (dispatch, getState) => {
                     ...value,
                 };
                 dispatch(addGroup(group));
-                for (const gameKey in value.games) { // eslint-disable-line
-                    if (Object.prototype.hasOwnProperty.call(value.games, gameKey)) {
-                        const gamePromise = database.ref('games').child(gameKey).once('value').then((gameSnapshot) => {
-                            const game = {
-                                id: gameSnapshot.key,
-                                ...gameSnapshot.val(),
+                for (const matchKey in value.matches) { // eslint-disable-line
+                    if (Object.prototype.hasOwnProperty.call(value.matches, matchKey)) {
+                        const matchPromise = database.ref('matches').child(matchKey).once('value').then((matchSnapshot) => {
+                            const match = {
+                                id: matchSnapshot.key,
+                                ...matchSnapshot.val(),
                             };
-                            dispatch(addGame(game));
+                            dispatch(addMatch(match));
                         });
-                        groupPromises.push(gamePromise);
+                        groupPromises.push(matchPromise);
                     }
                 }
                 for (const playerKey in value.players) { // eslint-disable-line

@@ -6,7 +6,8 @@ import ReactDOM from 'react-dom';
 import { FormWrapper } from '../common/FormWrapper';
 
 const positions = [
-    'GOLEIRO', 'ZAGUEIRO', 'LATERAL', 'MEIA', 'ATACANTE',
+    'GOLEIRO', 'ZAGUEIRO', 'LATERAL ESQUERDO', 'LATERAL DIREITO',
+    'VOLANTE', 'MEIO-CAMPO', 'ATACANTE',
 ];
 
 export class PlayerForm extends React.Component {
