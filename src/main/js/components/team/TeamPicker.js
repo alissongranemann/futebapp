@@ -1,14 +1,48 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import Select from 'react-select';
 
-const TeamPicker = props => (
-    <div className={props.className}>
-        {props.name}
-    </div>
-);
+export class TeamPicker extends React.Component {
+    constructor(props) {
+        super(props);
 
-const mapStateToProps = state => ({
-    players: state.players, // TODO: filter
-});
+        this.state = {
+            selectedOption: null,
+        };
+    }
 
-export default connect(mapStateToProps)(TeamPicker);
+    render() {
+        const {
+            name, className, selectedPlayers, availablePlayers, handleChange,
+        } = this.props;
+        const { selectedOption } = this.state;
+        return (
+            <div className={className}>
+                {name}
+                <div>
+                    <Select
+                        value={selectedOption}
+                        onChange={handleChange}
+                        // TODO: availablePlayers === 0
+                        options={availablePlayers.map(player => ({
+                            value: player.name,
+                            label: player.name,
+                        }))}
+                        placeholder="Selecione um jogador"
+                    />
+                </div>
+                <div>
+                    <ul>
+                        {
+                            selectedPlayers.length !== 0
+                            && selectedPlayers.map(
+                                (player, index) => <li key={index}>{player.name}</li>,
+                            )
+                        }
+                    </ul>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default TeamPicker;
