@@ -1,5 +1,12 @@
 import React from 'react';
 import Select from 'react-select';
+import { withStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core';
+import PlayerList from '../player/PlayerList';
+
+const styles = {
+
+};
 
 export class TeamPicker extends React.Component {
     constructor(props) {
@@ -17,32 +24,35 @@ export class TeamPicker extends React.Component {
         const { selectedOption } = this.state;
         return (
             <div className={className}>
-                {name}
-                <div>
-                    <Select
-                        value={selectedOption}
-                        onChange={handleChange}
-                        // TODO: availablePlayers === 0
-                        options={availablePlayers.map(player => ({
-                            value: player.name,
-                            label: player.name,
-                        }))}
-                        placeholder="Selecione um jogador"
-                    />
-                </div>
-                <div>
-                    <ul>
-                        {
-                            selectedPlayers.length !== 0
-                            && selectedPlayers.map(
-                                (player, index) => <li key={index}>{player.name}</li>,
-                            )
-                        }
-                    </ul>
-                </div>
+                <Typography variant="h5">
+                    {name.toUpperCase()}
+                </Typography>
+                {
+                    availablePlayers.length === 0 ? (
+                        <Typography variant="subtitle1" align="center" >
+                            Não há jogadores no grupo
+                        </Typography>
+                    ) : (
+                        <React.Fragment>
+                            <Select
+                                value={selectedOption}
+                                onChange={handleChange}
+                                options={availablePlayers.map(player => ({
+                                    value: player.name,
+                                    label: player.name,
+                                }))}
+                                placeholder="Selecione um jogador"
+                            />
+                            <PlayerList
+                                players={selectedPlayers}
+                                readOnly
+                            />
+                        </React.Fragment>
+                    )
+                }
             </div>
         );
     }
 }
 
-export default TeamPicker;
+export default withStyles(styles)(TeamPicker);

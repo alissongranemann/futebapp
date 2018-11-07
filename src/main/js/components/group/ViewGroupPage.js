@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MatchList from 'components/match/MatchList';
-import PlayerList from 'components/player/PlayerList';
+import WrapperPlayerList from 'components/player/WrapperPlayerList';
 import IconButton from '@material-ui/core/IconButton';
 import ArrowBack from '@material-ui/icons/ArrowBack';
 import Typography from '@material-ui/core/Typography';
@@ -19,7 +19,7 @@ const ViewGroupPage = props => (
             </div>
         </div>
         <MatchList groupId={props.group.id} />
-        <PlayerList groupId={props.group.id} />
+        <WrapperPlayerList groupId={props.group.id} />
     </div>
 );
 
