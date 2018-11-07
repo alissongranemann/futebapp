@@ -15,21 +15,27 @@ export class PlayerListItem extends React.Component {
     };
 
     render() {
+        const {
+            divider, id, name, position, readOnly,
+        } = this.props;
         return (
-            <ListItem divider={this.props.divider}>
+            <ListItem divider={divider}>
                 <ListItemAvatar>
                     <Avatar>
                         <PersonIcon />
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                    primary={this.props.name}
-                    secondary={this.props.position}
+                    primary={name}
+                    secondary={position}
                 />
-                <ListItemAction
-                    editLink={`/player/edit/${this.props.id}`}
-                    onRemove={this.onRemove}
-                />
+                {
+                    readOnly
+                        && <ListItemAction
+                            editLink={`/player/edit/${id}`}
+                            onRemove={this.onRemove}
+                        />
+                }
             </ListItem>
         );
     }
