@@ -1,15 +1,16 @@
 const path = require('path');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (process.env.NODE_ENV === 'test') {
-    require('dotenv').config({ path: '.env.test' });
+    dotenv.config({ path: '.env.test' });
 } else if (process.env.NODE_ENV === 'development') {
-    require('dotenv').config({ path: '.env.development' });
+    dotenv.config({ path: '.env.development' });
 }
 
 module.exports = (env) => {
@@ -19,7 +20,7 @@ module.exports = (env) => {
         entry: { main: './src/main/js/app.js' },
         output: {
             path: path.join(__dirname, 'dist'),
-            filename: '[name].[chunkhash:8].js'
+            filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
         },
         module: {
             rules: [
@@ -40,18 +41,18 @@ module.exports = (env) => {
                             loader: MiniCssExtractPlugin.loader,
                             options: {
                                 sourceMap: true,
-                            }
+                            },
                         },
                         'css-loader',
-                        'sass-loader'
-                    ]
+                        'sass-loader',
+                    ],
                 },
             ],
         },
         plugins: [
-            new CleanWebpackPlugin('dist', {} ),
+            new CleanWebpackPlugin('dist', {}),
             new MiniCssExtractPlugin({
-                filename: 'styles.[contenthash:8].css',
+                filename: isProduction ? 'styles.[contenthash:8].css' : 'styles.css',
             }),
             new webpack.DefinePlugin({
                 'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
@@ -62,11 +63,10 @@ module.exports = (env) => {
                 'process.env.FIREBASE_MESSAGING_SENDER_ID': JSON.stringify(process.env.FIREBASE_MESSAGING_SENDER_ID),
             }),
             new HtmlWebpackPlugin({
-                inject: true,
+                inject: false,
                 hash: true,
                 template: './public/index.html',
-                filename: './index.html'
-                //TODO: index sumindo nas rotas
+                filename: './index.html',
             }),
         ],
         mode: isProduction ? 'production' : 'development',
@@ -75,7 +75,6 @@ module.exports = (env) => {
             contentBase: path.join(__dirname, 'dist'),
             compress: true,
             historyApiFallback: true,
-            publicPath: '.',
             port: 3000,
             watchContentBase: true,
             watchOptions: {
@@ -94,9 +93,9 @@ module.exports = (env) => {
                 cacheGroups: {
                     commons: {
                         test: /[\\/]node_modules[\\/]/,
-                        name: "vendor",
-                        chunks: "initial",
-                        enforce: true
+                        name: 'vendor',
+                        chunks: 'initial',
+                        enforce: true,
                     },
                     // styles: {
                     //     name: 'styles',
