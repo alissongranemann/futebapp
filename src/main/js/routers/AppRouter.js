@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import GroupDashboardPage from 'components/GroupDashboardPage';
 import AddGroupPage from 'components/group/AddGroupPage';
 import EditGroupPage from 'components/group/EditGroupPage';
@@ -20,7 +21,8 @@ export const history = createBrowserHistory();
 
 const AppRouter = () => (
     <Router history={history}>
-        <div>
+        <React.Fragment>
+            <CssBaseline />
             <Switch>
                 <PublicRoute path="/" component={LoginPage} exact={true} />
                 <PublicRoute path="/signup" component={SignUpPage} />
@@ -35,7 +37,7 @@ const AppRouter = () => (
                 <PrivateRoute path="/player/edit/:id" component={EditPlayerPage} />
                 <Route component={NotFoundPage} />
             </Switch>
-        </div>
+        </React.Fragment>
     </Router>
 );
 

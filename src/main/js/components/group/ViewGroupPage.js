@@ -2,24 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import MatchList from 'components/match/MatchList';
 import WrapperPlayerList from 'components/player/WrapperPlayerList';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowBack from '@material-ui/icons/ArrowBack';
-import Typography from '@material-ui/core/Typography';
+import PageWithHeader from '../common/PageWithHeader';
 
 const ViewGroupPage = props => (
     <div>
-        <div className="page-header">
-            <div className="content-container page-header__action">
-                <Typography variant="h4" align="left">
-                    {props.group.name.toUpperCase()}
-                </Typography>
-                <IconButton aria-label="Go back" onClick={props.history.goBack}>
-                    <ArrowBack fontSize="large" />
-                </IconButton>
-            </div>
-        </div>
-        <MatchList groupId={props.group.id} />
-        <WrapperPlayerList groupId={props.group.id} />
+        <PageWithHeader
+            title={props.group.name}
+            onClickHeaderAction={props.history.goBack}
+            readOnly
+        >
+            <MatchList groupId={props.group.id} />
+            <WrapperPlayerList groupId={props.group.id} />
+        </PageWithHeader>
     </div>
 );
 

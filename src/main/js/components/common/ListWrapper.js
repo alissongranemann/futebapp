@@ -9,7 +9,7 @@ const ListWrapper = (props) => {
     } = props;
 
     return (
-        <div className="content-container list">
+        <div className="list">
             <Typography variant="h5" gutterBottom>
                 {title.toUpperCase()}
             </Typography>

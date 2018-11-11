@@ -8,26 +8,28 @@ import ListWrapper from '../common/ListWrapper';
 export class GroupList extends React.Component {
     render() {
         return (
-            <ListWrapper
-                title="Seus grupos"
-                createLink="/group/create/"
-                createButtonLabel="Criar grupo"
-            >
-                <List className="list__body">
-                    {
-                        this.props.groups.length === 0 ? (
-                            <Typography variant="subtitle1" align="center" >
-                                Sem grupos
-                            </Typography>
-                        ) : (
-                            this.props.groups.map(group => <GroupListItem
-                                key={group.id}
-                                {...group}
-                            />)
-                        )
-                    }
-                </List>
-            </ListWrapper >
+            <div className="content-container">
+                <ListWrapper
+                    title="Seus grupos"
+                    createLink="/group/create/"
+                    createButtonLabel="Criar grupo"
+                >
+                    <List className="list__body">
+                        {
+                            this.props.groups.length === 0 ? (
+                                <Typography variant="subtitle1" align="center" >
+                                    Sem grupos
+                                </Typography>
+                            ) : (
+                                this.props.groups.map(group => <GroupListItem
+                                    key={group.id}
+                                    {...group}
+                                />)
+                            )
+                        }
+                    </List>
+                </ListWrapper >
+            </div>
         );
     }
 }
