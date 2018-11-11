@@ -10,6 +10,8 @@ import { startSetGroups } from './actions/groups';
 import { login, logout } from './actions/auth';
 import LoadingPage from './components/LoadingPage';
 import 'styles.scss'; // eslint-disable-line
+import football from 'football.png'; // eslint-disable-line
+// <img src={football}/>
 
 const store = configureStore();
 

@@ -47,6 +47,17 @@ module.exports = (env) => {
                         'sass-loader',
                     ],
                 },
+                {
+                    test: /\.(png|jpg|gif)$/,
+                    use: [
+                        {
+                            loader: 'file-loader',
+                            options: {
+                                name: '[name].[ext]',
+                            },
+                        },
+                    ],
+                },
             ],
         },
         plugins: [
@@ -66,7 +77,8 @@ module.exports = (env) => {
                 inject: false,
                 hash: true,
                 template: './public/index.html',
-                filename: './index.html',
+                favicon: './src/images/football.png',
+                filename: 'index.html',
             }),
         ],
         mode: isProduction ? 'production' : 'development',
@@ -85,6 +97,7 @@ module.exports = (env) => {
             modules: [
                 path.resolve('./src/main/js'),
                 path.resolve('./src/main/css'),
+                path.resolve('./src/images'),
                 path.resolve('./node_modules'),
             ],
         },

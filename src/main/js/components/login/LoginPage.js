@@ -4,8 +4,17 @@ import { startLoginGoogle, startLoginFacebook, startLoginEmail } from 'actions/a
 import { Link } from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { positiveButtonStyles } from 'styles/button';
+import googleImg from 'icon-google.png'; // eslint-disable-line
+import football from 'football.png'; // eslint-disable-line
+import PositiveActionButton from '../common/PositiveActionButton';
+
+const styles = {
+    row: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+};
 
 export class LoginPage extends React.Component {
     constructor(props) {
@@ -41,7 +50,6 @@ export class LoginPage extends React.Component {
 
     render() {
         const { classes } = this.props;
-
         return (
             <div className="box-layout">
                 <div className="box-layout__wrap_box">
@@ -49,11 +57,11 @@ export class LoginPage extends React.Component {
                         Entrar
                     </span>
                     <div className="box-layout__box">
-                        <div className="input-row__even">
+                        <div className={classes.row}>
                             <a
                                 className="google_btn"
                                 onClick={this.props.startLoginGoogle}>
-                                <img src="images/icons/icon-google.png" alt="GOOGLE" />
+                                <img src={googleImg} alt="GOOGLE" />
                                 Google
                             </a>
                             <a
@@ -84,9 +92,7 @@ export class LoginPage extends React.Component {
                             />
                             <Link to="/reset">Esqueceu sua senha?</Link>
                             <br />
-                            <Button type="submit" variant="contained" size="large" color='primary' className={classes.button}>
-                                Entrar
-                            </Button>
+                            <PositiveActionButton label="Entrar" onClick={this.onSubmit} />
                             <div className="login-footer">
                                 <p>Não tem conta?</p>
                                 <Link to="/signup">Registrar-se</Link>
@@ -106,4 +112,4 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const connectedComponent = connect(undefined, mapDispatchToProps)(LoginPage);
-export default withStyles(positiveButtonStyles)(connectedComponent);
+export default withStyles(styles)(connectedComponent);
