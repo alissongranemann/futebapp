@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
+import { Typography, Grid } from '@material-ui/core';
 // import PlayerList from '../player/PlayerList';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';
@@ -27,10 +27,12 @@ export class TeamPicker extends React.Component {
         } = this.props;
         const { selectedOption, selectedPlayers } = this.state;
         return (
-            <div className={className}>
-                <Typography variant="h5">
-                    {name.toUpperCase()}
-                </Typography>
+            <Grid container spacing={24} className={className}>
+                <Grid item xs={12}>
+                    <Typography variant="h5">
+                        {name.toUpperCase()}
+                    </Typography>
+                </Grid>
                 {
                     availablePlayers.length === 0 ? (
                         <Typography variant="subtitle1" align="center" >
@@ -42,38 +44,42 @@ export class TeamPicker extends React.Component {
                                 players={selectedPlayers}
                                 readOnly
                             /> */}
-                            <Select
-                                value={selectedOption}
-                                onChange={handleChange}
-                                options={availablePlayers.map(player => ({
-                                    value: player.name,
-                                    label: player.name,
-                                }))}
-                                placeholder="Selecione um jogador"
-                            />
-                            <Paper>
-                                <List className="list__body">
-                                    {
-                                        selectedPlayers.length === 0 ? (
-                                            <Typography variant="subtitle1" align="center" >
-                                                Sem jogadores
-                                            </Typography>
-                                        ) : (
-                                            selectedPlayers
-                                                .map((player, index, arr) => <PlayerListItem
-                                                    key={player.id}
-                                                    readOnly={true}
-                                                    {...player}
-                                                    divider={index !== arr.length - 1}
-                                                />)
-                                        )
-                                    }
-                                </List>
-                            </Paper>
+                            <Grid item xs={12}>
+                                <Select
+                                    value={selectedOption}
+                                    onChange={handleChange}
+                                    options={availablePlayers.map(player => ({
+                                        value: player.name,
+                                        label: player.name,
+                                    }))}
+                                    placeholder="Selecione um jogador"
+                                />
+                            </Grid>
+                            <Grid item xs={12}>
+                                <Paper>
+                                    <List className="list__body">
+                                        {
+                                            selectedPlayers.length === 0 ? (
+                                                <Typography variant="subtitle1" align="center" >
+                                                        Sem jogadores
+                                                </Typography>
+                                            ) : (
+                                                selectedPlayers
+                                                    .map((player, index, arr) => <PlayerListItem
+                                                        key={player.id}
+                                                        readOnly={true}
+                                                        {...player}
+                                                        divider={index !== arr.length - 1}
+                                                    />)
+                                            )
+                                        }
+                                    </List>
+                                </Paper>
+                            </Grid>
                         </React.Fragment>
                     )
                 }
-            </div>
+            </Grid>
         );
     }
 }

@@ -30,7 +30,7 @@ export class PlayerListItem extends React.Component {
                     secondary={position}
                 />
                 {
-                    readOnly
+                    !readOnly
                         && <ListItemAction
                             editLink={`/player/edit/${id}`}
                             onRemove={this.onRemove}

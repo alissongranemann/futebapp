@@ -11,12 +11,8 @@ const styles = theme => ({
     },
     team: {
         width: '100%',
-        paddingLeft: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-    },
-    teamA: {
-        borderRightStyle: 'solid',
-        borderRightWidth: 1,
+        paddingLeft: theme.spacing.unit * 2,
+        paddingRight: theme.spacing.unit * 2,
     },
 });
 
@@ -46,7 +42,7 @@ export class TeamComponent extends React.Component {
         return (
             <div className={classes.root}>
                 <TeamPicker
-                    className={`${classes.team} ${classes.teamA}`}
+                    className={classes.team}
                     name="Time A"
                     availablePlayers={availablePlayers}
                     selectedPlayers={teamA}
