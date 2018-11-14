@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
 import PageWithHeader from './PageWithHeader';
 
 const FormPageWrapper = props => (

@@ -1,7 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
-import { Typography, Grid } from '@material-ui/core';
+import withStyles from '@material-ui/core/styles/withStyles';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
 // import PlayerList from '../player/PlayerList';
 import List from '@material-ui/core/List';
 import Paper from '@material-ui/core/Paper';

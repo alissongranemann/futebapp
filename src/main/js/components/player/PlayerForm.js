@@ -1,7 +1,11 @@
 import React from 'react';
-import {
-    TextField, FormControl, InputLabel, Grid, Select, MenuItem, OutlinedInput,
-} from '@material-ui/core';
+import TextField from '@material-ui/core/TextField';
+import FormControl from '@material-ui/core/FormControl';
+import InputLabel from '@material-ui/core/InputLabel';
+import Grid from '@material-ui/core/Grid';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import ReactDOM from 'react-dom';
 import { FormWrapper } from '../common/FormWrapper';
 

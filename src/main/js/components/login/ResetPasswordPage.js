@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { startResetPassword } from 'actions/auth';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { positiveButtonStyles } from 'styles/button';
-import { withRouter } from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
 
 export class ResetPasswordPage extends React.Component {
     constructor(props) {

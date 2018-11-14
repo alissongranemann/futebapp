@@ -3,7 +3,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import IconButton from '@material-ui/core/IconButton';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 
 const ListItemAction = (props) => {
     const { editLink, onRemove } = props;

@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Link from 'react-router-dom/Link';
 import { startLoginGoogle, startLoginFacebook, startLoginEmail } from 'actions/auth';
-import { Link } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
 import googleImg from 'icon-google.png'; // eslint-disable-line
-import football from 'football.png'; // eslint-disable-line
-import PositiveActionButton from '../common/PositiveActionButton';
+import PositiveActionButton from 'components/common/PositiveActionButton';
 
 const styles = {
     row: {

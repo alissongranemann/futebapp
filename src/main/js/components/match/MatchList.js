@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 import List from '@material-ui/core/List';
-import { Paper } from '@material-ui/core';
+import Paper from '@material-ui/core/Paper';
 import ListWrapper from '../common/ListWrapper';
 import MatchListItem from './MatchListItem';
 

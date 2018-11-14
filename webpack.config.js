@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -79,6 +80,9 @@ module.exports = (env) => {
                 template: './public/index.html',
                 favicon: './src/images/football.png',
                 filename: 'index.html',
+            }),
+            new MomentLocalesPlugin({
+                localesToKeep: ['pt-br'],
             }),
         ],
         mode: isProduction ? 'production' : 'development',
