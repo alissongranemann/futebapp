@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MomentLocalesPlugin = require('moment-locales-webpack-plugin');
+const AsyncChunkNames = require('webpack-async-chunk-names-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -22,6 +23,8 @@ module.exports = (env) => {
         output: {
             path: path.join(__dirname, 'dist'),
             filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
+            chunkFilename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
+            publicPath: '/',
         },
         module: {
             rules: [
@@ -84,6 +87,7 @@ module.exports = (env) => {
             new MomentLocalesPlugin({
                 localesToKeep: ['pt-br'],
             }),
+            new AsyncChunkNames(),
         ],
         mode: isProduction ? 'production' : 'development',
         devtool: isProduction ? 'source-map' : 'inline-source-map',
@@ -96,6 +100,7 @@ module.exports = (env) => {
             watchOptions: {
                 ignored: /node_modules/,
             },
+            publicPath: '/',
         },
         resolve: {
             modules: [
@@ -108,21 +113,25 @@ module.exports = (env) => {
         optimization: {
             splitChunks: {
                 cacheGroups: {
-                    commons: {
-                        test: /[\\/]node_modules[\\/]/,
+                    default: false,
+                    vendors: false,
+                    vendor: {
                         name: 'vendor',
-                        chunks: 'initial',
-                        enforce: true,
+                        chunks: 'all',
+                        test: /node_modules/,
+                        priority: 20
                     },
-                    // styles: {
-                    //     name: 'styles',
-                    //     test: /\.scss$/,
-                    //     chunks: 'all',
-                    //     enforce: true
-                    // }
-                },
+                    common: {
+                        name: 'common',
+                        minChunks: 2,
+                        chunks: 'async',
+                        priority: 10,
+                        reuseExistingChunk: true,
+                        enforce: true
+                    }
+                }
             },
             runtimeChunk: true,
-        },
+        }
     };
 };
