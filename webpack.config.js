@@ -22,8 +22,8 @@ module.exports = (env) => {
         entry: { main: './src/main/js/app.js' },
         output: {
             path: path.join(__dirname, 'dist'),
-            filename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
-            chunkFilename: isProduction ? '[name].[chunkhash:8].js' : '[name].js',
+            filename: isProduction ? '[chunkhash:8].js' : '[name].js',
+            chunkFilename: isProduction ? '[chunkhash:8].js' : '[name].js',
             publicPath: '/',
         },
         module: {
@@ -67,7 +67,7 @@ module.exports = (env) => {
         plugins: [
             new CleanWebpackPlugin('dist', {}),
             new MiniCssExtractPlugin({
-                filename: isProduction ? 'styles.[contenthash:8].css' : 'styles.css',
+                filename: isProduction ? '[contenthash:8].css' : 'styles.css',
             }),
             new webpack.DefinePlugin({
                 'process.env.FIREBASE_API_KEY': JSON.stringify(process.env.FIREBASE_API_KEY),
